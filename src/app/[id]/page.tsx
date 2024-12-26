@@ -1,5 +1,6 @@
-import DigitalCard from '@/components/DigitalCard';  // Changed this line
+import DigitalCard from '@/components/DigitalCard';
 import { google } from 'googleapis';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 async function getEmployeeData(uniqueId: string) {
   try {
@@ -39,9 +40,41 @@ async function getEmployeeData(uniqueId: string) {
   }
 }
 
-export default async function CardPage({ params }: { params: { id: string } }) {
-  const employeeData = await getEmployeeData(params.id);
+export const getStaticPaths: GetStaticPaths = async () => {
+  // Fetch unique IDs from the Google Sheet to generate paths
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    },
+    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+  });
 
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.GOOGLE_SHEET_ID,
+    range: 'Employee Cards!G2:G', // Assuming unique IDs are in column G starting from row 2
+  });
+
+  const paths = response.data.values?.flat().map((id) => ({
+    params: { id },
+  })) || [];
+
+  return { paths, fallback: 'blocking' };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const employeeData = await getEmployeeData(params?.id as string);
+
+  if (!employeeData) {
+    return { notFound: true };
+  }
+
+  return { props: { employeeData } };
+};
+
+export default function CardPage({ employeeData }: { employeeData: any }) {
   if (!employeeData) {
     return <div>Card not found</div>;
   }
