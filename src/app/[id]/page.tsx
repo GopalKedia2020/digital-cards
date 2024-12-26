@@ -1,12 +1,10 @@
 import DigitalCard from '@/components/DigitalCard';
 import { google } from 'googleapis';
 
-// Define the type for just what we need - the id parameter
-type Props = {
-  params: {
-    id: string;
-  };
-};
+// Correctly type the page params
+type PageProps = {
+  params: { id: string }
+}
 
 async function getEmployeeData(uniqueId: string) {
   try {
@@ -28,7 +26,6 @@ async function getEmployeeData(uniqueId: string) {
     const rows = response.data.values;
     if (!rows) return null;
 
-    // Find the row with matching unique ID
     const row = rows.find(row => row[6]?.includes(uniqueId));
     if (!row) return null;
 
@@ -46,8 +43,7 @@ async function getEmployeeData(uniqueId: string) {
   }
 }
 
-// Remove searchParams since we're not using it
-export default async function CardPage({ params }: Props) {
+export default async function CardPage({ params }: PageProps) {
   const employeeData = await getEmployeeData(params.id);
 
   if (!employeeData) {
