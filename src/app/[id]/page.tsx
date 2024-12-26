@@ -1,15 +1,19 @@
+import { Metadata } from 'next';
 import DigitalCard from '@/components/DigitalCard';
 
-interface Props {
-  params: {
-    id: string;
+export async function generateMetadata(
+  { params }: { params: { id: string } }
+): Promise<Metadata> {
+  return {
+    title: `Digital Card - Somani Realtors`
   };
 }
 
-export default function Page({ params }: Props) {
-  // Using params.id to make it explicitly used
-  console.log(`Rendering card for ID: ${params.id}`);
-  
+export default async function Page({ 
+  params: { id } 
+}: { 
+  params: { id: string } 
+}) {
   const employeeData = {
     firstName: "John",
     lastName: "Doe",
