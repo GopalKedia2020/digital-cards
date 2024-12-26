@@ -1,13 +1,9 @@
 import DigitalCard from '@/components/DigitalCard';
 
-// Basic props type definition that works with Next.js 13 App Router
-async function generateMetadata() {
-  return {
-    title: 'Digital Card - Somani Realtors'
-  };
-}
+export const metadata = {
+  title: 'Digital Card - Somani Realtors'
+};
 
-// Simple page component that just displays static data for now
 export default function Page() {
   const employeeData = {
     firstName: "John",
