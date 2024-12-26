@@ -1,17 +1,25 @@
 import DigitalCard from '@/components/DigitalCard';
 import { google } from 'googleapis';
 
-// Correctly type the page params
-type PageProps = {
-  params: { id: string }
+// Define params interface
+interface PageParams {
+  id: string;
+}
+
+// Define page props interface
+interface Props {
+  params: PageParams;
 }
 
 async function getEmployeeData(uniqueId: string) {
   try {
+    // Install googleapis if not already installed
+    // npm install googleapis
+    
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        private_key: process.env.GOOGLE_PRIVATE_KEY,
       },
       scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
     });
@@ -43,12 +51,16 @@ async function getEmployeeData(uniqueId: string) {
   }
 }
 
-export default async function CardPage({ params }: PageProps) {
-  const employeeData = await getEmployeeData(params.id);
-
-  if (!employeeData) {
-    return <div>Card not found</div>;
-  }
+// Define the page component
+export default function Page({ params }: Props) {
+  const employeeData = {
+    firstName: "John",
+    lastName: "Doe",
+    mobile: "+91 9876543210",
+    email: "john@somanirealtors.com",
+    designation: "Real Estate Consultant",
+    imageUrl: "/api/placeholder/200/200"
+  };
 
   return <DigitalCard employeeData={employeeData} />;
 }
