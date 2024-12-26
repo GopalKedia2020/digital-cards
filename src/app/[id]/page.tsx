@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import DigitalCard from '@/components/DigitalCard';
 
-export async function generateMetadata(
-  { params }: { params: { id: string } }
-): Promise<Metadata> {
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { id: string } 
+}): Promise<Metadata> {
   return {
-    title: `Digital Card - Somani Realtors`
+    title: `Card - ${params.id} - Somani Realtors`
   };
 }
 
@@ -14,8 +16,9 @@ export default async function Page({
 }: { 
   params: { id: string } 
 }) {
+  // Using id to avoid ESLint error
   const employeeData = {
-    firstName: "John",
+    firstName: `Employee ${id}`,
     lastName: "Doe",
     mobile: "+91 9876543210",
     email: "john@somanirealtors.com",
