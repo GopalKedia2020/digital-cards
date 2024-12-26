@@ -1,5 +1,5 @@
+import DigitalCard from '@/components/DigitalCard';  // Changed this line
 import { google } from 'googleapis';
-import { DigitalCard } from '@/components/DigitalCard';
 
 async function getEmployeeData(uniqueId: string) {
   try {
