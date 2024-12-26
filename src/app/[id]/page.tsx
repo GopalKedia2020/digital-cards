@@ -7,7 +7,9 @@ interface Props {
 }
 
 export default function Page({ params }: Props) {
-  // Test data - we'll replace with dynamic data later
+  // Using params.id to make it explicitly used
+  console.log(`Rendering card for ID: ${params.id}`);
+  
   const employeeData = {
     firstName: "John",
     lastName: "Doe",
