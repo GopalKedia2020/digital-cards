@@ -1,24 +1,16 @@
-import { Metadata } from 'next';
 import DigitalCard from '@/components/DigitalCard';
 
-export async function generateMetadata({ 
-  params 
-}: { 
-  params: { id: string } 
-}): Promise<Metadata> {
+// Basic props type definition that works with Next.js 13 App Router
+async function generateMetadata() {
   return {
-    title: `Card - ${params.id} - Somani Realtors`
+    title: 'Digital Card - Somani Realtors'
   };
 }
 
-export default async function Page({ 
-  params: { id } 
-}: { 
-  params: { id: string } 
-}) {
-  // Using id to avoid ESLint error
+// Simple page component that just displays static data for now
+export default function Page() {
   const employeeData = {
-    firstName: `Employee ${id}`,
+    firstName: "John",
     lastName: "Doe",
     mobile: "+91 9876543210",
     email: "john@somanirealtors.com",
