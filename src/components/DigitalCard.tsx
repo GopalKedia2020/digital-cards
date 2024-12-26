@@ -1,5 +1,6 @@
 // Import necessary dependencies
 import React from 'react';
+import Image from 'next/image';
 // Import icons from lucide-react library that we'll use for our contact buttons
 import { 
   PhoneIcon, 
@@ -76,9 +77,11 @@ const DigitalCard = ({
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-4 relative">
         <div className="flex justify-center">
           <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white">
-            <img 
+            <Image 
               src={employeeData.imageUrl}
               alt={`${employeeData.firstName} ${employeeData.lastName}`}
+              width={128}
+              height={128}
               className="w-full h-full object-cover"
             />
           </div>

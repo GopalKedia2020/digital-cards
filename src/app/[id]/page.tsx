@@ -1,6 +1,14 @@
 import DigitalCard from '@/components/DigitalCard';
 import { google } from 'googleapis';
 
+// Define the correct type for page params
+type Props = {
+  params: {
+    id: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 async function getEmployeeData(uniqueId: string) {
   try {
     const auth = new google.auth.GoogleAuth({
@@ -39,7 +47,8 @@ async function getEmployeeData(uniqueId: string) {
   }
 }
 
-export default async function CardPage({ params }: { params: { id: string } }) {
+// Update the component with correct type annotation
+export default async function CardPage({ params, searchParams }: Props) {
   const employeeData = await getEmployeeData(params.id);
 
   if (!employeeData) {
