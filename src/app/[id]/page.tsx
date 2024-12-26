@@ -1,12 +1,11 @@
 import DigitalCard from '@/components/DigitalCard';
 import { google } from 'googleapis';
 
-// Define the correct type for page params
+// Define the type for just what we need - the id parameter
 type Props = {
   params: {
     id: string;
   };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 async function getEmployeeData(uniqueId: string) {
@@ -47,8 +46,8 @@ async function getEmployeeData(uniqueId: string) {
   }
 }
 
-// Update the component with correct type annotation
-export default async function CardPage({ params, searchParams }: Props) {
+// Remove searchParams since we're not using it
+export default async function CardPage({ params }: Props) {
   const employeeData = await getEmployeeData(params.id);
 
   if (!employeeData) {
