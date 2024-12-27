@@ -1,4 +1,3 @@
-import { google } from 'googleapis';
 import DigitalCard from '@/components/DigitalCard';
 
 export const metadata = {
@@ -6,7 +5,6 @@ export const metadata = {
 };
 
 export default function Page() {
-  // Fallback data - we know this works
   const employeeData = {
     firstName: "John",
     lastName: "Doe",
@@ -16,6 +14,5 @@ export default function Page() {
     imageUrl: "/api/placeholder/200/200"
   };
 
-  // We'll add Google Sheets here in the next step
   return <DigitalCard employeeData={employeeData} />;
 }
