@@ -2,12 +2,10 @@ import { google } from 'googleapis';
 import DigitalCard from '@/components/DigitalCard';
 import { Metadata } from 'next';
 
-// Static metadata for the page
 export const metadata: Metadata = {
   title: 'Digital Card - Somani Realtors'
 };
 
-// Function to fetch employee data from Google Sheets
 async function getEmployeeData(cardId: string) {
   try {
     const auth = new google.auth.GoogleAuth({
@@ -45,18 +43,13 @@ async function getEmployeeData(cardId: string) {
   }
 }
 
-// The key change is in this function signature
-export default async function Page({
-  searchParams,
-  params,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-  params: { id: string };
-}) {
-  // Try to fetch employee data
+type PageProps = {
+  params: { id: string }
+};
+
+export default async function Page({ params }: PageProps) {
   const fetchedData = await getEmployeeData(params.id);
 
-  // Fallback data if fetch fails
   const fallbackData = {
     firstName: "John",
     lastName: "Doe",
@@ -66,7 +59,6 @@ export default async function Page({
     imageUrl: "/api/placeholder/200/200"
   };
 
-  // Use fetched data or fallback if fetch failed
   const employeeData = fetchedData || fallbackData;
 
   return <DigitalCard employeeData={employeeData} />;
