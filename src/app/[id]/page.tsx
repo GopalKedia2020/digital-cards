@@ -1,3 +1,4 @@
+// src/app/[id]/page.tsx
 import DigitalCard from '@/components/DigitalCard';
 import { employees } from '@/data/employees';
 
@@ -5,12 +6,16 @@ export const metadata = {
   title: 'Digital Card - Somani Realtors'
 };
 
-export default function Page({ params }: { params: { id: string } }) {
-  // Get employee data or use fallback
-  const employeeData = employees[params.id as keyof typeof employees] || {
+type PageParams = {
+  id: string;
+}
+
+export default function Page(context: { params: PageParams }) {
+  const id = context.params.id;
+  const employeeData = id && employees[id] ? employees[id] : {
     firstName: "John",
     lastName: "Doe",
-    mobile: "+91 9876543210",
+    mobile: "+919830046276",
     email: "contact@somanirealtors.com",
     designation: "Real Estate Consultant",
     imageUrl: "/api/placeholder/200/200"
