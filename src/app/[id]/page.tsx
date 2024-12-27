@@ -10,12 +10,14 @@ export default async function Page({ params }: { params: { id: string } }) {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error);
+      // Instead of throwing error, log it
+      console.error(`API Error: ${data.error}`);
+      throw new Error();
     }
 
     return <DigitalCard employeeData={data} />;
-  } catch (error) {
-    // Fallback data if API fails
+  } catch {
+    // Removed unused error parameter
     const fallbackData = {
       firstName: "John",
       lastName: "Doe",
