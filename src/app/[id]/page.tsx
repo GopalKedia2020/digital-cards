@@ -7,10 +7,14 @@ export const metadata = {
 
 type PageParams = {
   id: string;
+};
+
+interface PageProps {
+  params: PageParams;
 }
 
-export default function Page(context: { params: PageParams }) {
-  const id = context.params.id;
+export default function Page({ params }: PageProps) {
+  const id = params.id;
   const employeeData = id && employees[id] ? employees[id] : {
     firstName: "John",
     lastName: "Doe",
