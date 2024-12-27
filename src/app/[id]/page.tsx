@@ -25,7 +25,6 @@ async function getEmployeeData(cardUrl: string) {
     const rows = response.data.values;
     if (!rows) return null;
 
-    // Skip header row and find matching row
     const row = rows.slice(1).find(row => row[6]?.includes(cardUrl));
     if (!row) return null;
 
@@ -43,11 +42,9 @@ async function getEmployeeData(cardUrl: string) {
   }
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  // Try to get employee data
-  const data = await getEmployeeData(params.id);
-
-  // Fallback data if no match found
+// Remove type annotation from params
+export default async function Page(props: any) {
+  // Fallback data
   const fallbackData = {
     firstName: "John",
     lastName: "Doe",
@@ -57,8 +54,15 @@ export default async function Page({ params }: { params: { id: string } }) {
     imageUrl: "/api/placeholder/200/200"
   };
 
-  // Use fetched data or fallback
-  const employeeData = data || fallbackData;
+  let employeeData = fallbackData;
+  
+  // Only try to fetch if we have an ID
+  if (props.params?.id) {
+    const data = await getEmployeeData(props.params.id);
+    if (data) {
+      employeeData = data;
+    }
+  }
 
   return <DigitalCard employeeData={employeeData} />;
 }
