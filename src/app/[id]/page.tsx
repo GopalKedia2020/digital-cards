@@ -6,14 +6,6 @@ export const metadata: Metadata = {
   title: 'Digital Card - Somani Realtors'
 }
 
-// Updated props type to match Next.js 13+ app router typing
-type Props = {
-  params: {
-    id: string
-  }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
 const defaultEmployee: EmployeeData = {
   firstName: "John",
   lastName: "Doe",
@@ -23,7 +15,12 @@ const defaultEmployee: EmployeeData = {
   imageUrl: "/api/placeholder/200/200"
 }
 
-export default function Page({ params }: Props) {
+// Make it an async component
+export default async function Page({
+  params,
+}: {
+  params: { id: string }
+}) {
   const employeeData = employees[params.id] || defaultEmployee
   return <DigitalCard employeeData={employeeData} />
 }
