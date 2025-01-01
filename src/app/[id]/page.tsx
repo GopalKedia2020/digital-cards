@@ -1,16 +1,17 @@
 import DigitalCard from '@/components/DigitalCard';
 import { employees } from '@/data/employees';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Digital Card - Somani Realtors'
 };
 
-// Using generics approach
-export default async function Page<T extends { id: string }>({
-  params,
-}: {
-  params: T;
-}) {
+// Using Record type
+type PageProps = {
+  params: Record<'id', string>;
+};
+
+export default async function Page({ params }: PageProps) {
   const employeeData = employees[params.id] || {
     firstName: "John",
     lastName: "Doe",
