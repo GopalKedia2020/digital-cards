@@ -5,15 +5,13 @@ export const metadata = {
   title: 'Digital Card - Somani Realtors'
 };
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-async function getData(id: string) {
-  return employees[id] || {
+// Using generics approach
+export default async function Page<T extends { id: string }>({
+  params,
+}: {
+  params: T;
+}) {
+  const employeeData = employees[params.id] || {
     firstName: "John",
     lastName: "Doe",
     mobile: "+919830046276",
@@ -21,9 +19,6 @@ async function getData(id: string) {
     designation: "Real Estate Consultant",
     imageUrl: "/api/placeholder/200/200"
   };
-}
 
-export default async function Page({ params }: PageProps) {
-  const employeeData = await getData(params.id);
   return <DigitalCard employeeData={employeeData} />;
 }
