@@ -15,12 +15,14 @@ const defaultEmployee: EmployeeData = {
   imageUrl: "/api/placeholder/200/200"
 }
 
-// Make it an async component
-export default async function Page({
-  params,
+export default function Page({
+  searchParams,
 }: {
-  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }) {
-  const employeeData = employees[params.id] || defaultEmployee
+  // Get the id from query parameters
+  const id = typeof searchParams.id === 'string' ? searchParams.id : undefined
+  const employeeData = id ? employees[id] || defaultEmployee : defaultEmployee
+
   return <DigitalCard employeeData={employeeData} />
 }
