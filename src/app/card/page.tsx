@@ -15,14 +15,21 @@ const defaultEmployee: EmployeeData = {
   imageUrl: "/api/placeholder/200/200"
 }
 
-export default function Page({
+// Adding async and proper Next.js 13 typing
+export default async function Page({
+  params,
   searchParams,
 }: {
+  params: {}
   searchParams: { [key: string]: string | string[] | undefined }
 }) {
-  // Get the id from query parameters
-  const id = typeof searchParams.id === 'string' ? searchParams.id : undefined
-  const employeeData = id ? employees[id] || defaultEmployee : defaultEmployee
+  // Handle potential array value from searchParams
+  const id = 
+    Array.isArray(searchParams.id) 
+      ? searchParams.id[0] 
+      : searchParams.id
+
+  const employeeData = id && employees[id] ? employees[id] : defaultEmployee
 
   return <DigitalCard employeeData={employeeData} />
 }
