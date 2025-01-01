@@ -1,19 +1,10 @@
-import type { Metadata } from 'next';
-import { NextPage } from 'next';
 import DigitalCard from '@/components/DigitalCard';
 import { employees } from '@/data/employees';
 
-export const metadata: Metadata = {
-  title: 'Digital Card - Somani Realtors'
-};
-
-type Props = {
-  params: { id: string }
-  searchParams?: { [key: string]: string | string[] | undefined }
-}
-
-const Page: NextPage<Props> = ({ params }) => {
-  const employeeData = employees[params.id] || {
+// Remove all type annotations
+export default function Page(props: any) {
+  const id = props.params.id;
+  const employeeData = employees[id] || {
     firstName: "John",
     lastName: "Doe",
     mobile: "+919830046276",
@@ -23,6 +14,4 @@ const Page: NextPage<Props> = ({ params }) => {
   };
 
   return <DigitalCard employeeData={employeeData} />;
-};
-
-export default Page;
+}
