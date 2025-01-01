@@ -1,17 +1,18 @@
+import type { Metadata } from 'next';
+import { NextPage } from 'next';
 import DigitalCard from '@/components/DigitalCard';
 import { employees } from '@/data/employees';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Digital Card - Somani Realtors'
 };
 
-// Using Record type
-type PageProps = {
-  params: Record<'id', string>;
-};
+type Props = {
+  params: { id: string }
+  searchParams?: { [key: string]: string | string[] | undefined }
+}
 
-export default async function Page({ params }: PageProps) {
+const Page: NextPage<Props> = ({ params }) => {
   const employeeData = employees[params.id] || {
     firstName: "John",
     lastName: "Doe",
@@ -22,4 +23,6 @@ export default async function Page({ params }: PageProps) {
   };
 
   return <DigitalCard employeeData={employeeData} />;
-}
+};
+
+export default Page;
