@@ -1,16 +1,28 @@
-import DigitalCard from '@/components/DigitalCard';
-import { employees } from '@/data/employees';
+import { type Metadata } from 'next'
+import DigitalCard from '@/components/DigitalCard'
+import { employees, type EmployeeData } from '@/data/employees'
 
-export default function Page(props: any) {
-  const id = props.params.id;
-  const employeeData = employees[id] || {
-    firstName: "John",
-    lastName: "Doe",
-    mobile: "+919830046276",
-    email: "contact@somanirealtors.com",
-    designation: "Real Estate Consultant",
-    imageUrl: "/api/placeholder/200/200"
-  };
+export const metadata: Metadata = {
+  title: 'Digital Card - Somani Realtors'
+}
 
-  return <DigitalCard employeeData={employeeData} />;
+interface PageProps {
+  params: {
+    id: string
+  }
+}
+
+const defaultEmployee: EmployeeData = {
+  firstName: "John",
+  lastName: "Doe",
+  mobile: "+919830046276",
+  email: "contact@somanirealtors.com",
+  designation: "Real Estate Consultant",
+  imageUrl: "/api/placeholder/200/200"
+}
+
+export default function Page({ params }: PageProps) {
+  const employeeData = employees[params.id] || defaultEmployee
+
+  return <DigitalCard employeeData={employeeData} />
 }
