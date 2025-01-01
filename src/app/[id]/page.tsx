@@ -6,10 +6,12 @@ export const metadata: Metadata = {
   title: 'Digital Card - Somani Realtors'
 }
 
-interface PageProps {
+// Updated props type to match Next.js 13+ app router typing
+type Props = {
   params: {
     id: string
   }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 const defaultEmployee: EmployeeData = {
@@ -21,8 +23,7 @@ const defaultEmployee: EmployeeData = {
   imageUrl: "/api/placeholder/200/200"
 }
 
-export default function Page({ params }: PageProps) {
+export default function Page({ params }: Props) {
   const employeeData = employees[params.id] || defaultEmployee
-
   return <DigitalCard employeeData={employeeData} />
 }

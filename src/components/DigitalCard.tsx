@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { 
   PhoneIcon, 
   MailIcon
@@ -33,11 +34,13 @@ const DigitalCard: React.FC<DigitalCardProps> = ({
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-4">
         <div className="flex justify-center">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white">
-            <img 
+          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white relative">
+            <Image 
               src={employeeData.imageUrl}
               alt={`${employeeData.firstName} ${employeeData.lastName}`}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="128px"
             />
           </div>
         </div>
