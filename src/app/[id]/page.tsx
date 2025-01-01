@@ -1,7 +1,6 @@
 import DigitalCard from '@/components/DigitalCard';
 import { employees } from '@/data/employees';
 
-// Remove all type annotations
 export default function Page(props: any) {
   const id = props.params.id;
   const employeeData = employees[id] || {
