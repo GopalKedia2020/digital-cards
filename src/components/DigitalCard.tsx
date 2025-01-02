@@ -29,7 +29,6 @@ interface DigitalCardProps {
   employeeData: EmployeeData
 }
 
-// Static company data
 const companyData = {
   name: "Somani Realtors",
   workPhone: "033 40274027",
@@ -57,7 +56,6 @@ const DigitalCard = ({ employeeData }: DigitalCardProps) => {
         const reader = new FileReader()
         reader.onloadend = () => {
           if (typeof reader.result === 'string') {
-            // Remove the data URL prefix and keep only the base64 data
             const base64String = reader.result.split(',')[1]
             resolve(base64String)
           } else {
@@ -75,7 +73,6 @@ const DigitalCard = ({ employeeData }: DigitalCardProps) => {
 
   const handleSaveContact = async () => {
     try {
-      // Get base64 image
       const photoData = employeeData.imageUrl ? await getBase64Image(employeeData.imageUrl) : ''
       
       const vCard = `BEGIN:VCARD
@@ -89,11 +86,11 @@ TEL;TYPE=WORK:${companyData.workPhone}
 EMAIL:${employeeData.email}
 ADR:;;${companyData.address}
 URL:${companyData.website}
-X-SOCIALPROFILE;TYPE=facebook:${companyData.socials.facebook}
-X-SOCIALPROFILE;TYPE=X.com:${companyData.socials.x}
-X-SOCIALPROFILE;TYPE=linkedin:${companyData.socials.linkedin}
-X-SOCIALPROFILE;TYPE=instagram:${companyData.socials.instagram}
-X-SOCIALPROFILE;TYPE=youtube:${companyData.socials.youtube}
+URL;type=Facebook:${companyData.socials.facebook}
+URL;type=x.com:${companyData.socials.x}
+URL;type=LinkedIn:${companyData.socials.linkedin}
+URL;type=Instagram:${companyData.socials.instagram}
+URL;type=YouTube:${companyData.socials.youtube}
 GEO:${companyData.coordinates.lat},${companyData.coordinates.lng}${photoData ? `
 PHOTO;ENCODING=b;TYPE=JPEG:${photoData}` : ''}
 END:VCARD`
@@ -112,7 +109,6 @@ END:VCARD`
     }
   }
 
-  // Generate Google Maps URL
   const getMapsUrl = () => {
     const query = encodeURIComponent(companyData.address)
     return `https://www.google.com/maps/search/?api=1&query=${query}`
@@ -120,7 +116,6 @@ END:VCARD`
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
-      {/* Header with gradient */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 h-32 flex items-center justify-center">
         <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white shadow-md transform translate-y-16">
           <Image 
@@ -134,7 +129,6 @@ END:VCARD`
         </div>
       </div>
 
-      {/* Content */}
       <div className="px-6 pt-20 pb-8">
         <h1 className="text-2xl font-bold text-center text-gray-900">
           {employeeData.firstName} {employeeData.lastName}
@@ -146,9 +140,7 @@ END:VCARD`
           {companyData.name}
         </p>
         
-        {/* Contact Details */}
         <div className="mt-8 space-y-3">
-          {/* Personal Mobile */}
           <a 
             href={`tel:${employeeData.mobile}`} 
             className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
@@ -160,7 +152,6 @@ END:VCARD`
             </div>
           </a>
 
-          {/* Office Phone */}
           <a 
             href={`tel:${companyData.workPhone}`} 
             className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
@@ -172,7 +163,6 @@ END:VCARD`
             </div>
           </a>
 
-          {/* Email */}
           <a 
             href={`mailto:${employeeData.email}`} 
             className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
@@ -181,7 +171,6 @@ END:VCARD`
             <span className="text-gray-700 break-all">{employeeData.email}</span>
           </a>
 
-          {/* Website */}
           <a 
             href={`https://${companyData.website}`}
             target="_blank"
@@ -192,7 +181,6 @@ END:VCARD`
             <span className="text-gray-700">{companyData.website}</span>
           </a>
 
-          {/* Address with Map Link */}
           <a 
             href={getMapsUrl()}
             target="_blank"
@@ -207,7 +195,6 @@ END:VCARD`
           </a>
         </div>
 
-        {/* Social Media Links */}
         <div className="mt-8 flex justify-center gap-4">
           <a 
             href={companyData.socials.facebook} 
@@ -256,7 +243,6 @@ END:VCARD`
           </a>
         </div>
 
-        {/* Save Contact Button */}
         <button
           onClick={handleSaveContact}
           className="w-full mt-8 bg-blue-600 text-white py-4 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors font-medium shadow-sm"
