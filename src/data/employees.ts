@@ -43,5 +43,13 @@ export const employees: EmployeeDatabase = {
     email: "sumeetroy@somanirealtors.com",
     designation: "Assistant General Manager - Operations",
     imageUrl: "https://somanirealtors.keka.com/files/36781736-e700-4bbd-aeea-afc1b3aae5f8/200x200/profileimage/035efabe76584e2695f8a2ab84c1b2ff.jpg?1735810669772?1735804800000",
+  },
+  'VuzVfpyjFGXjruoiSOEq0LBg4qrm4NhB': {
+    firstName: "Rajesh",
+    lastName: "Somani",
+    mobile: "+919830055540",
+    email: "rajesh@somanirealtors.com",
+    designation: "Managing Director",
+    imageUrl: "https://somanirealtors.keka.com/files/36781736-e700-4bbd-aeea-afc1b3aae5f8/200x200/profileimage/beea76a9508d4eef9fab3c54352da00e.jpg?1735812187855?1735804800000",
   }
 };
