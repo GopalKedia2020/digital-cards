@@ -17,7 +17,7 @@ export const employees: EmployeeDatabase = {
     lastName: "Kedia",
     mobile: "+919830046276",
     email: "gopalkedia@somanirealtors.com",
-    designation: "Operations Manager",
+    designation: "Manager - Operations",
     imageUrl: "https://somanirealtors.keka.com/files/36781736-e700-4bbd-aeea-afc1b3aae5f8/200x200/profileimage/1b4a0e365020446b86965cd9df864cc3.jpg",
   },
   'CIqAPZ9shdMGgtyU5YewJRoEL7MneF4m': {
