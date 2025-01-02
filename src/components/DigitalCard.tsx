@@ -41,7 +41,7 @@ const companyData = {
   },
   socials: {
     facebook: "https://facebook.com/somanirealtors",
-    twitter: "https://x.com/somani_realtors",
+    x: "https://x.com/somani_realtors",
     instagram: "https://www.instagram.com/somanirealtors/",
     linkedin: "https://in.linkedin.com/company/somanirealtors",
     youtube: "https://www.youtube.com/c/SomaniRealtorsPvtLtd"
@@ -90,7 +90,7 @@ EMAIL:${employeeData.email}
 ADR:;;${companyData.address}
 URL:${companyData.website}
 X-SOCIALPROFILE;TYPE=facebook:${companyData.socials.facebook}
-X-SOCIALPROFILE;TYPE=X (formerly Twitter):${companyData.socials.twitter}
+X-SOCIALPROFILE;TYPE=X (formerly Twitter):${companyData.socials.x}
 X-SOCIALPROFILE;TYPE=linkedin:${companyData.socials.linkedin}
 X-SOCIALPROFILE;TYPE=instagram:${companyData.socials.instagram}
 X-SOCIALPROFILE;TYPE=youtube:${companyData.socials.youtube}
@@ -209,28 +209,49 @@ END:VCARD`
 
         {/* Social Media Links */}
         <div className="mt-8 flex justify-center gap-4">
-          <a href={companyData.socials.facebook} target="_blank" rel="noopener noreferrer" 
-             className="text-blue-600 hover:text-blue-700 transition-colors">
+          <a 
+            href={companyData.socials.facebook} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="Facebook"
+          >
             <FacebookIcon className="w-6 h-6" />
           </a>
-          <a href={companyData.socials.twitter} 
-             target="_blank" 
-             rel="noopener noreferrer"
-             className="text-blue-600 hover:text-blue-700 transition-colors"
-             title="X"
+          <a 
+            href={companyData.socials.x}
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="X"
           >
             <XIcon className="w-5 h-5" />
           </a>
-          <a href={companyData.socials.instagram} target="_blank" rel="noopener noreferrer"
-             className="text-blue-600 hover:text-blue-700 transition-colors">
+          <a 
+            href={companyData.socials.instagram} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="Instagram"
+          >
             <InstagramIcon className="w-6 h-6" />
           </a>
-          <a href={companyData.socials.linkedin} target="_blank" rel="noopener noreferrer"
-             className="text-blue-600 hover:text-blue-700 transition-colors">
+          <a 
+            href={companyData.socials.linkedin} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="LinkedIn"
+          >
             <LinkedinIcon className="w-6 h-6" />
           </a>
-          <a href={companyData.socials.youtube} target="_blank" rel="noopener noreferrer"
-             className="text-blue-600 hover:text-blue-700 transition-colors">
+          <a 
+            href={companyData.socials.youtube} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="YouTube"
+          >
             <YoutubeIcon className="w-6 h-6" />
           </a>
         </div>
