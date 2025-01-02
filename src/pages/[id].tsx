@@ -1,8 +1,9 @@
-import { NextPage } from 'next'
+import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import DigitalCard from '@/components/DigitalCard'
-import { employees, type EmployeeData } from '@/data/employees'
+import { employees } from '@/data/employees'
+import type { EmployeeData } from '@/components/DigitalCard'
 
 const defaultEmployee: EmployeeData = {
   firstName: "John",
@@ -16,26 +17,24 @@ const defaultEmployee: EmployeeData = {
 const CardPage: NextPage = () => {
   const router = useRouter()
   const { id } = router.query
-  
-  // Handle the case when the page is being server-side rendered
-  // and router.query is not yet available
+
   if (!router.isReady) {
     return null
   }
 
-  const employeeData = 
+  const employeeData: EmployeeData = 
     typeof id === 'string' && employees[id] 
       ? employees[id] 
       : defaultEmployee
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-50 py-8">
       <Head>
-        <title>Digital Card - Somani Realtors</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{`${employeeData.firstName} ${employeeData.lastName} | Somani Realtors`}</title>
+        <meta name="description" content={`Digital Business Card for ${employeeData.firstName} ${employeeData.lastName} - ${employeeData.designation} at Somani Realtors`} />
       </Head>
       <DigitalCard employeeData={employeeData} />
-    </>
+    </div>
   )
 }
 

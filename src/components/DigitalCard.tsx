@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { PhoneIcon, MailIcon, SaveIcon } from 'lucide-react'
 
-interface EmployeeData {
+export interface EmployeeData {
   firstName: string
   lastName: string
   mobile: string
@@ -15,9 +15,8 @@ interface DigitalCardProps {
   employeeData: EmployeeData
 }
 
-const DigitalCard: React.FC<DigitalCardProps> = ({ employeeData }) => {
+const DigitalCard = ({ employeeData }: DigitalCardProps) => {
   const handleSaveContact = () => {
-    // Create vCard format
     const vCard = `BEGIN:VCARD
 VERSION:3.0
 FN:${employeeData.firstName} ${employeeData.lastName}
@@ -27,7 +26,6 @@ TEL;TYPE=CELL:${employeeData.mobile}
 EMAIL:${employeeData.email}
 END:VCARD`
 
-    // Create blob and download
     const blob = new Blob([vCard], { type: 'text/vcard' })
     const url = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
@@ -40,7 +38,6 @@ END:VCARD`
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
-      {/* Header with gradient */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-6">
         <div className="flex justify-center">
           <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white">
@@ -56,7 +53,6 @@ END:VCARD`
         </div>
       </div>
 
-      {/* Content */}
       <div className="p-6">
         <h1 className="text-2xl font-bold text-center text-gray-900">
           {employeeData.firstName} {employeeData.lastName}
@@ -81,7 +77,6 @@ END:VCARD`
           </a>
         </div>
 
-        {/* Save Contact Button */}
         <button
           onClick={handleSaveContact}
           className="w-full mt-8 bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center space-x-2 hover:bg-blue-700 transition-colors"
