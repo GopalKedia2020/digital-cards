@@ -1,41 +1,22 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import DigitalCard from '@/components/DigitalCard'
-import { employees } from '@/data/employees'
-import type { EmployeeData } from '@/data/employees'
+import { useRouter } from 'next/router';
+import DigitalCard from '../components/DigitalCard';
+import { employees } from '../data/employees';
 
-const defaultEmployee: EmployeeData = {
-  firstName: "John",
-  lastName: "Doe",
-  mobile: "+919830046276",
-  email: "contact@somanirealtors.com",
-  designation: "Real Estate Consultant",
-  imageUrl: "/api/placeholder/200/200"
-}
+const EmployeeCardPage = () => {
+  const router = useRouter();
+  const { id } = router.query;
 
-const CardPage: NextPage = () => {
-  const router = useRouter()
-  const { id } = router.query
-
-  if (!router.isReady) {
-    return null
+  if (!id || typeof id !== 'string') {
+    return <div>Loading...</div>;
   }
 
-  const employeeData: EmployeeData = 
-    typeof id === 'string' && employees[id] 
-      ? employees[id] 
-      : defaultEmployee
+  const employeeData = employees[id];
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <Head>
-        <title>{`${employeeData.firstName} ${employeeData.lastName} | Somani Realtors`}</title>
-        <meta name="description" content={`Digital Business Card for ${employeeData.firstName} ${employeeData.lastName} - ${employeeData.designation} at Somani Realtors`} />
-      </Head>
-      <DigitalCard employeeData={employeeData} />
-    </div>
-  )
-}
+  if (!employeeData) {
+    return <div>Employee not found</div>;
+  }
 
-export default CardPage
+  return <DigitalCard employeeData={employeeData} />;
+};
+
+export default EmployeeCardPage;

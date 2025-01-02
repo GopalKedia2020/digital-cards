@@ -1,22 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 import { PhoneIcon, MailIcon, MapPinIcon, GlobeIcon, DownloadIcon, FacebookIcon, TwitterIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from 'lucide-react';
-import { employees } from '../data/employees';
+import { employees, EmployeeData } from '../data/employees';
 
 interface DigitalCardProps {
-  employeeId: string;
+  employeeData: EmployeeData;
 }
 
-const DigitalCard: React.FC<DigitalCardProps> = ({ employeeId }) => {
-  const employeeData = employees[employeeId] || {
-    firstName: "John",
-    lastName: "Doe",
-    mobile: "+91 9876543210",
-    email: "john.doe@example.com",
-    designation: "Real Estate Consultant",
-    imageUrl: "/default-placeholder.png",
-  };
-
+const DigitalCard: React.FC<DigitalCardProps> = ({ employeeData }) => {
   const companyData = {
     name: "Somani Realtors",
     workPhone: "033 40274027",
