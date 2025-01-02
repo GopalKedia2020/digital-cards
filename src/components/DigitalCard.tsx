@@ -90,7 +90,7 @@ EMAIL:${employeeData.email}
 ADR:;;${companyData.address}
 URL:${companyData.website}
 X-SOCIALPROFILE;TYPE=facebook:${companyData.socials.facebook}
-X-SOCIALPROFILE;TYPE=X (formerly Twitter):${companyData.socials.x}
+X-SOCIALPROFILE;TYPE=X.com:${companyData.socials.x}
 X-SOCIALPROFILE;TYPE=linkedin:${companyData.socials.linkedin}
 X-SOCIALPROFILE;TYPE=instagram:${companyData.socials.instagram}
 X-SOCIALPROFILE;TYPE=youtube:${companyData.socials.youtube}
