@@ -11,6 +11,7 @@ import {
   LinkedinIcon,
   YoutubeIcon
 } from 'lucide-react'
+
 const XIcon = ({ className }: { className?: string }) => (
   <svg 
     viewBox="0 0 24 24" 
@@ -21,6 +22,7 @@ const XIcon = ({ className }: { className?: string }) => (
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 )
+
 import type { EmployeeData } from '@/data/employees'
 
 interface DigitalCardProps {
@@ -33,7 +35,6 @@ const companyData = {
   workPhone: "033 40274027",
   website: "www.somanirealtors.com",
   address: "Somani Realtors, 2nd Floor, 40, Ashutosh Mukherjee Rd, Bhowanipore, Kolkata, West Bengal 700020",
-  // Google Maps coordinates for the office
   coordinates: {
     lat: "22.5257",
     lng: "88.3451"
@@ -56,7 +57,7 @@ const DigitalCard = ({ employeeData }: DigitalCardProps) => {
         const reader = new FileReader()
         reader.onloadend = () => {
           if (typeof reader.result === 'string') {
-            // Remove the data URL prefix
+            // Remove the data URL prefix and keep only the base64 data
             const base64String = reader.result.split(',')[1]
             resolve(base64String)
           } else {
@@ -74,11 +75,12 @@ const DigitalCard = ({ employeeData }: DigitalCardProps) => {
 
   const handleSaveContact = async () => {
     try {
-      // Get base64 image if available
-      const photoData = await getBase64Image(employeeData.imageUrl)
+      // Get base64 image
+      const photoData = employeeData.imageUrl ? await getBase64Image(employeeData.imageUrl) : ''
       
       const vCard = `BEGIN:VCARD
 VERSION:3.0
+N:${employeeData.lastName};${employeeData.firstName};;;
 FN:${employeeData.firstName} ${employeeData.lastName}
 ORG:${companyData.name}
 TITLE:${employeeData.designation}
@@ -92,8 +94,8 @@ X-SOCIALPROFILE;TYPE=twitter:${companyData.socials.twitter}
 X-SOCIALPROFILE;TYPE=linkedin:${companyData.socials.linkedin}
 X-SOCIALPROFILE;TYPE=instagram:${companyData.socials.instagram}
 X-SOCIALPROFILE;TYPE=youtube:${companyData.socials.youtube}
-GEO:${companyData.coordinates.lat},${companyData.coordinates.lng}
-${photoData ? `PHOTO;ENCODING=b;TYPE=JPEG:${photoData}` : ''}
+GEO:${companyData.coordinates.lat},${companyData.coordinates.lng}${photoData ? `
+PHOTO;ENCODING=b;TYPE=JPEG:${photoData}` : ''}
 END:VCARD`
 
       const blob = new Blob([vCard], { type: 'text/vcard' })
