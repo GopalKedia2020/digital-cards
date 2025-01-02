@@ -29,7 +29,7 @@ export const employees: EmployeeDatabase = {
     imageUrl: "https://somanirealtors.keka.com/files/36781736-e700-4bbd-aeea-afc1b3aae5f8/200x200/profileimage/f2d06cf8236e4250a1e4b82599449f73.jpeg?1735277187231?1735272000000",
   },
   'uj9bSiHEB94qmp7hNVFYhzqwJuA7QFqt': {
-    firstName: "Amit Kumar",
+    firstName: "Amit",
     lastName: "Roy",
     mobile: "+919830013815",
     email: "amitroy@somanirealtors.com",
