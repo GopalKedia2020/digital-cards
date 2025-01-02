@@ -90,7 +90,7 @@ EMAIL:${employeeData.email}
 ADR:;;${companyData.address}
 URL:${companyData.website}
 X-SOCIALPROFILE;TYPE=facebook:${companyData.socials.facebook}
-X-SOCIALPROFILE;TYPE=twitter:${companyData.socials.twitter}
+X-SOCIALPROFILE;TYPE=X (formerly Twitter):${companyData.socials.twitter}
 X-SOCIALPROFILE;TYPE=linkedin:${companyData.socials.linkedin}
 X-SOCIALPROFILE;TYPE=instagram:${companyData.socials.instagram}
 X-SOCIALPROFILE;TYPE=youtube:${companyData.socials.youtube}
@@ -216,13 +216,10 @@ END:VCARD`
           <a href={companyData.socials.twitter} 
              target="_blank" 
              rel="noopener noreferrer"
-             className="text-blue-600 hover:text-blue-700 transition-colors group relative"
-             title="X (formerly Twitter)"
+             className="text-blue-600 hover:text-blue-700 transition-colors"
+             title="X"
           >
             <XIcon className="w-5 h-5" />
-            <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">
-              X (formerly Twitter)
-            </span>
           </a>
           <a href={companyData.socials.instagram} target="_blank" rel="noopener noreferrer"
              className="text-blue-600 hover:text-blue-700 transition-colors">
