@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import { type Metadata } from 'next'
 import Image from 'next/image'
 import { 
   PhoneIcon, 
@@ -8,6 +8,12 @@ import {
   LinkedinIcon,
   FacebookIcon 
 } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'Somani Realtors | Digital Business Cards',
+  description: 'Connect with Somani Realtors professionals through our digital business cards. Easy access to contact information and professional profiles.',
+  keywords: 'Somani Realtors, digital business cards, real estate, Kolkata'
+}
 
 export default function Home() {
   return (
