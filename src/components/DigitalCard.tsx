@@ -39,8 +39,36 @@ const companyData = {
 }
 
 const DigitalCard = ({ employeeData }: DigitalCardProps) => {
-  const handleSaveContact = () => {
-    const vCard = `BEGIN:VCARD
+  const getBase64Image = async (imageUrl: string): Promise<string> => {
+    try {
+      const response = await fetch(imageUrl)
+      const blob = await response.blob()
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          if (typeof reader.result === 'string') {
+            // Remove the data URL prefix
+            const base64String = reader.result.split(',')[1]
+            resolve(base64String)
+          } else {
+            reject(new Error('Failed to convert image to base64'))
+          }
+        }
+        reader.onerror = reject
+        reader.readAsDataURL(blob)
+      })
+    } catch (error) {
+      console.error('Error converting image to base64:', error)
+      return ''
+    }
+  }
+
+  const handleSaveContact = async () => {
+    try {
+      // Get base64 image if available
+      const photoData = await getBase64Image(employeeData.imageUrl)
+      
+      const vCard = `BEGIN:VCARD
 VERSION:3.0
 FN:${employeeData.firstName} ${employeeData.lastName}
 ORG:${companyData.name}
@@ -56,16 +84,21 @@ X-SOCIALPROFILE;TYPE=linkedin:${companyData.socials.linkedin}
 X-SOCIALPROFILE;TYPE=instagram:${companyData.socials.instagram}
 X-SOCIALPROFILE;TYPE=youtube:${companyData.socials.youtube}
 GEO:${companyData.coordinates.lat},${companyData.coordinates.lng}
+${photoData ? `PHOTO;ENCODING=b;TYPE=JPEG:${photoData}` : ''}
 END:VCARD`
 
-    const blob = new Blob([vCard], { type: 'text/vcard' })
-    const url = window.URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.setAttribute('download', `${employeeData.firstName}_${employeeData.lastName}_Somani.vcf`)
-    document.body.appendChild(link)
-    link.click()
-    link.remove()
+      const blob = new Blob([vCard], { type: 'text/vcard' })
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `${employeeData.firstName}_${employeeData.lastName}_Somani.vcf`)
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.URL.revokeObjectURL(url)
+    } catch (error) {
+      console.error('Error creating vCard:', error)
+    }
   }
 
   // Generate Google Maps URL
