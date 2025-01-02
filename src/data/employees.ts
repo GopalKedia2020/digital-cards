@@ -51,5 +51,13 @@ export const employees: EmployeeDatabase = {
     email: "rajesh@somanirealtors.com",
     designation: "Managing Director",
     imageUrl: "https://somanirealtors.keka.com/files/36781736-e700-4bbd-aeea-afc1b3aae5f8/200x200/profileimage/beea76a9508d4eef9fab3c54352da00e.jpg?1735812187855?1735804800000",
+  },
+  'RqB0cpb4jzEo17x7Ib62XoaKsnZqCDPl': {
+    firstName: "Piyush",
+    lastName: "Tewary",
+    mobile: "+919830076186",
+    email: "piyushtewary@somanirealtors.com",
+    designation: "Manager - Business Process",
+    imageUrl: "https://somanirealtors.keka.com/files/36781736-e700-4bbd-aeea-afc1b3aae5f8/200x200/profileimage/58d81d50ea3f421391cb4507bd872045.jpg?1735813149664?1735804800000",
   }
 };
