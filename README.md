@@ -1,4 +1,3 @@
-Based on the screenshot and our work so far, I'll create a summary for the README:
 
 ```markdown
 # Somani Realtors Digital Business Cards
@@ -101,5 +100,3 @@ Add employee data to `src/data/employees.ts` following the defined interface:
   }
 }
 ```
-
-Would you like me to add any additional sections to this README summary?
