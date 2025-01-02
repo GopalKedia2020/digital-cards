@@ -37,23 +37,26 @@ END:VCARD`
   }
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
-      {/* Header with gradient and image */}
-      <div className="relative bg-gradient-to-r from-blue-600 to-blue-800 p-6 flex justify-center items-center h-48">
-        <div className="relative w-32 h-32 rounded-full border-4 border-white bg-white shadow-lg z-10">
-          <Image 
-            src={employeeData.imageUrl}
-            alt={`${employeeData.firstName} ${employeeData.lastName}`}
-            fill
-            className="rounded-full object-cover"
-            sizes="128px"
-            priority
-          />
+    <div className="relative max-w-md mx-auto bg-white shadow-xl rounded-xl overflow-hidden">
+      {/* Header with gradient */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 h-40">
+        {/* Profile Image Container */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2" style={{ top: '160px' }}>
+          <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white shadow-lg">
+            <Image 
+              src={employeeData.imageUrl}
+              alt={`${employeeData.firstName} ${employeeData.lastName}`}
+              width={128}
+              height={128}
+              className="rounded-full object-cover"
+              priority
+            />
+          </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-6 pt-8">
+      <div className="pt-20 p-6">
         <h1 className="text-2xl font-bold text-center text-gray-900">
           {employeeData.firstName} {employeeData.lastName}
         </h1>
