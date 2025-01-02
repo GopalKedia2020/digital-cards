@@ -24,6 +24,11 @@ const companyData = {
   workPhone: "033 40274027",
   website: "www.somanirealtors.com",
   address: "Somani Realtors, 2nd Floor, 40, Ashutosh Mukherjee Rd, Bhowanipore, Kolkata, West Bengal 700020",
+  // Google Maps coordinates for the office
+  coordinates: {
+    lat: "22.5257",
+    lng: "88.3451"
+  },
   socials: {
     facebook: "https://facebook.com/somanirealtors",
     twitter: "https://twitter.com/somani_realtors",
@@ -45,6 +50,12 @@ TEL;TYPE=WORK:${companyData.workPhone}
 EMAIL:${employeeData.email}
 ADR:;;${companyData.address}
 URL:${companyData.website}
+X-SOCIALPROFILE;TYPE=facebook:${companyData.socials.facebook}
+X-SOCIALPROFILE;TYPE=twitter:${companyData.socials.twitter}
+X-SOCIALPROFILE;TYPE=linkedin:${companyData.socials.linkedin}
+X-SOCIALPROFILE;TYPE=instagram:${companyData.socials.instagram}
+X-SOCIALPROFILE;TYPE=youtube:${companyData.socials.youtube}
+GEO:${companyData.coordinates.lat},${companyData.coordinates.lng}
 END:VCARD`
 
     const blob = new Blob([vCard], { type: 'text/vcard' })
@@ -55,6 +66,12 @@ END:VCARD`
     document.body.appendChild(link)
     link.click()
     link.remove()
+  }
+
+  // Generate Google Maps URL
+  const getMapsUrl = () => {
+    const query = encodeURIComponent(companyData.address)
+    return `https://www.google.com/maps/search/?api=1&query=${query}`
   }
 
   return (
@@ -131,11 +148,19 @@ END:VCARD`
             <span className="text-gray-700">{companyData.website}</span>
           </a>
 
-          {/* Address */}
-          <div className="flex items-center gap-3 p-4 rounded-lg bg-gray-50">
+          {/* Address with Map Link */}
+          <a 
+            href={getMapsUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group"
+          >
             <MapPinIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
-            <span className="text-gray-700 text-sm">{companyData.address}</span>
-          </div>
+            <div>
+              <span className="text-gray-700 text-sm">{companyData.address}</span>
+              <span className="text-sm text-blue-600 block group-hover:underline">Open in Google Maps</span>
+            </div>
+          </a>
         </div>
 
         {/* Social Media Links */}
