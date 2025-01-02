@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Based on the screenshot and our work so far, I'll create a summary for the README:
 
-## Getting Started
+```markdown
+# Somani Realtors Digital Business Cards
 
-First, run the development server:
+A Next.js application that creates digital business cards for Somani Realtors employees.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Project Structure
+```
+somani-cards-new/
+├── public/
+│   ├── somani-logo.png
+│   ├── vercel.svg
+│   ├── next.svg
+│   └── window.svg
+├── src/
+│   ├── components/
+│   │   └── DigitalCard.tsx      # Digital card component
+│   ├── data/
+│   │   └── employees.ts         # Employee data store
+│   ├── pages/
+│   │   ├── [id]/
+│   │   │   └── page.tsx        # Dynamic route for individual cards
+│   │   └── index.tsx           # Homepage
+│   └── styles/
+│       └── globals.css
+└── config files (next.config.ts, package.json, etc.)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
+- Dynamic digital business cards with unique URLs for each employee
+- Modern, responsive design with Tailwind CSS
+- Save contact functionality (vCard download)
+- Social media integration
+- Google Maps location integration
+- Professional profile images
+- Company branding and information
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technology Stack
+- Next.js 13
+- TypeScript
+- Tailwind CSS
+- Lucide React Icons
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Key Components
+1. **DigitalCard Component**
+   - Professional profile display
+   - Contact information
+   - Social media links
+   - Save contact functionality
+   - Location information
 
-## Learn More
+2. **Homepage**
+   - Company branding
+   - How it works section
+   - Features overview
+   - Contact information
+   - Social media links
 
-To learn more about Next.js, take a look at the following resources:
+3. **Dynamic Routing**
+   - Each employee gets a unique URL
+   - Access via random URL for privacy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Data Management
+Employee data is stored in `src/data/employees.ts` using TypeScript interfaces for type safety.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Running the Project
+```bash
+# Install dependencies
+npm install
 
-## Deploy on Vercel
+# Run development server
+npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Build for production
+npm run build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Start production server
+npm start
+```
+
+## Deployment
+The project is deployed on Vercel and accessible at card.somani.app
+
+## Environment Variables
+```env
+NEXT_PUBLIC_SITE_URL=https://card.somani.app
+```
+
+## Adding New Employees
+Add employee data to `src/data/employees.ts` following the defined interface:
+```typescript
+{
+  '[unique-id]': {
+    firstName: string;
+    lastName: string;
+    mobile: string;
+    email: string;
+    designation: string;
+    imageUrl: string;
+  }
+}
+```
+
+Would you like me to add any additional sections to this README summary?
