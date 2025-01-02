@@ -6,13 +6,25 @@ import {
   MapPinIcon,
   InstagramIcon,
   LinkedinIcon,
-  FacebookIcon 
+  FacebookIcon,
+  YoutubeIcon 
 } from 'lucide-react'
+
+const XIcon = ({ className }: { className?: string }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    className={className} 
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+)
 
 export const metadata: Metadata = {
   title: 'Somani Realtors | Digital Business Cards',
   description: 'Connect with Somani Realtors professionals through our digital business cards. Easy access to contact information and professional profiles.',
-  keywords: 'Somani Realtors, digital business cards, real estate, Kolkata'
+  keywords: 'Somani Realtors, digital business cards, real estate, Kolkata, Bengals most diversified realtor'
 }
 
 export default function Home() {
@@ -36,8 +48,8 @@ export default function Home() {
               <a href="tel:03340274027" className="text-gray-700 hover:text-blue-600 text-sm font-medium">
                 033 4027 4027
               </a>
-              <a href="mailto:contact@somanirealtors.com" className="text-gray-700 hover:text-blue-600 text-sm font-medium">
-                contact@somanirealtors.com
+              <a href="mailto:sales@somanirealtors.com" className="text-gray-700 hover:text-blue-600 text-sm font-medium">
+                sales@somanirealtors.com
               </a>
             </nav>
           </div>
@@ -70,7 +82,7 @@ export default function Home() {
                   <span className="text-blue-600 font-bold text-xl">1</span>
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Receive Link</h3>
-                <p className="text-gray-600">Get your unique digital card link from our team member</p>
+                <p className="text-gray-600">Get your unique digital card link</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
                 <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -138,7 +150,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Somani Realtors</h3>
               <p className="text-gray-400 text-sm">
-                Leading real estate consultancy in Kolkata since 1992
+              Realty Services Par Excellence
               </p>
             </div>
 
@@ -165,9 +177,17 @@ export default function Home() {
                    className="text-gray-400 hover:text-white transition-colors">
                   <InstagramIcon className="w-6 h-6" />
                 </a>
+                <a href="https://x.com/somani_realtors" target="_blank" rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors">
+                    <XIcon className="w-5 h-5" />
+                </a>
                 <a href="https://linkedin.com/company/somanirealtors" target="_blank" rel="noopener noreferrer"
                    className="text-gray-400 hover:text-white transition-colors">
                   <LinkedinIcon className="w-6 h-6" />
+                </a>
+                <a href="https://www.youtube.com/c/SomaniRealtorsPvtLtd" target="_blank" rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors">
+                    <YoutubeIcon className="w-6 h-6" />
                 </a>
               </div>
             </div>
