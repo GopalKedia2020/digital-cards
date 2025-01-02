@@ -7,7 +7,6 @@ import {
   MapPinIcon, 
   GlobeIcon,
   FacebookIcon,
-  TwitterIcon,
   InstagramIcon,
   LinkedinIcon,
   YoutubeIcon
