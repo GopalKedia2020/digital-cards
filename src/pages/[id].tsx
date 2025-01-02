@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import DigitalCard from '@/components/DigitalCard'
 import { employees } from '@/data/employees'
-import type { EmployeeData } from '@/components/DigitalCard'
+import type { EmployeeData } from '@/data/employees'
 
 const defaultEmployee: EmployeeData = {
   firstName: "John",
