@@ -4,24 +4,12 @@ import {
   PhoneIcon, 
   MailIcon, 
   MapPinIcon, 
-  GlobeIcon, 
   FacebookIcon, 
   InstagramIcon, 
   LinkedinIcon, 
   YoutubeIcon, 
   SaveIcon 
 } from 'lucide-react';
-
-const XIcon = ({ className }: { className?: string }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    className={className} 
-    fill="currentColor"
-    aria-hidden="true"
-  >
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
 
 import type { EmployeeData } from '@/data/employees';
 
@@ -116,7 +104,6 @@ END:VCARD`;
 
   return (
     <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-      {/* Logo Section */}
       <div className="bg-gradient-to-r from-blue-500 to-blue-700 flex justify-center p-4">
         <Image 
           src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg" 
@@ -126,7 +113,6 @@ END:VCARD`;
           className="object-contain"
         />
       </div>
-      {/* Employee Info */}
       <div className="p-4">
         <div className="flex flex-col items-center text-center">
           <Image
@@ -140,7 +126,6 @@ END:VCARD`;
           <p className="text-gray-600 text-sm">{employeeData.designation}</p>
           <p className="text-blue-600 text-sm mt-1">{companyData.name}</p>
         </div>
-        {/* Contact Section */}
         <div className="space-y-3 mt-4">
           <a href={`tel:${employeeData.mobile}`} className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg shadow-sm hover:bg-gray-100">
             <PhoneIcon className="w-5 h-5 text-blue-600" />
@@ -155,14 +140,12 @@ END:VCARD`;
             <span>View Office Location</span>
           </a>
         </div>
-        {/* Social Links */}
         <div className="flex justify-around mt-4">
           <a href={companyData.socials.facebook} target="_blank" rel="noopener noreferrer"><FacebookIcon className="w-5 h-5 text-blue-600" /></a>
           <a href={companyData.socials.instagram} target="_blank" rel="noopener noreferrer"><InstagramIcon className="w-5 h-5 text-blue-600" /></a>
           <a href={companyData.socials.linkedin} target="_blank" rel="noopener noreferrer"><LinkedinIcon className="w-5 h-5 text-blue-600" /></a>
           <a href={companyData.socials.youtube} target="_blank" rel="noopener noreferrer"><YoutubeIcon className="w-5 h-5 text-blue-600" /></a>
         </div>
-        {/* Save Contact */}
         <button
           onClick={handleSaveContact}
           className="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2"
