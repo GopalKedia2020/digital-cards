@@ -66,6 +66,6 @@ export const employees: EmployeeDatabase = {
     mobile: "+919830058363",
     email: "shruti@somanirealtors.com",
     designation: "Executive - Marketing",
-    imageUrl: "https://somanirealtors.keka.com/files/36781736-e700-4bbd-aeea-afc1b3aae5f8/200x200/profileimage/40cc5775f7094cbd923ddfc4937280e4.jpg?1735820147278?1735819200000",
+    imageUrl: "https://somanirealtors.keka.com/files/36781736-e700-4bbd-aeea-afc1b3aae5f8/200x200/profileimage/fa75f90fde664a5d9fc2864827ab2455.jpg?1735909959263?1735905600000",
   }
 };
