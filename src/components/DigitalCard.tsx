@@ -116,6 +116,17 @@ END:VCARD`
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
+      {/* Added Company Logo */}
+      <div className="flex justify-center mt-6">
+        <Image 
+          src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg" 
+          alt="Somani Realtors Logo" 
+          width={120} 
+          height={120} 
+          className="object-contain" 
+        />
+      </div>
+
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 h-32 flex items-center justify-center">
         <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white shadow-md transform translate-y-16">
           <Image 
