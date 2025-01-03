@@ -33,7 +33,7 @@ const companyData = {
   name: "Somani Realtors",
   workPhone: "033 40274027",
   website: "www.somanirealtors.com",
-  address: "Somani Realtors, 2nd Floor, 40, Ashutosh Mukherjee Rd, Bhowanipore, Kolkata, West Bengal 700020",
+  address: "Somani Realtors Pvt. Ltd., 40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020",
   coordinates: {
     lat: "22.5257",
     lng: "88.3451"
