@@ -8,7 +8,8 @@ import {
   InstagramIcon, 
   LinkedinIcon, 
   YoutubeIcon, 
-  SaveIcon 
+  SaveIcon, 
+  XIcon 
 } from 'lucide-react';
 
 import type { EmployeeData } from '@/data/employees';
@@ -142,6 +143,7 @@ END:VCARD`;
         </div>
         <div className="flex justify-around mt-4">
           <a href={companyData.socials.facebook} target="_blank" rel="noopener noreferrer"><FacebookIcon className="w-5 h-5 text-blue-600" /></a>
+          <a href={companyData.socials.x} target="_blank" rel="noopener noreferrer"><XIcon className="w-5 h-5 text-blue-600" /></a>
           <a href={companyData.socials.instagram} target="_blank" rel="noopener noreferrer"><InstagramIcon className="w-5 h-5 text-blue-600" /></a>
           <a href={companyData.socials.linkedin} target="_blank" rel="noopener noreferrer"><LinkedinIcon className="w-5 h-5 text-blue-600" /></a>
           <a href={companyData.socials.youtube} target="_blank" rel="noopener noreferrer"><YoutubeIcon className="w-5 h-5 text-blue-600" /></a>
