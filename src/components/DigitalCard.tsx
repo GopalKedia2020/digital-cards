@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 import {
   PhoneIcon,
   MailIcon,
@@ -9,7 +9,7 @@ import {
   LinkedinIcon,
   YoutubeIcon,
   GlobeIcon,
-} from 'lucide-react';
+} from "lucide-react";
 
 const XIcon = ({ className }: { className?: string }) => (
   <svg
@@ -22,159 +22,136 @@ const XIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-interface EmployeeData {
-  firstName: string;
-  lastName: string;
-  designation: string;
-  mobile: string;
-  email: string;
-  imageUrl: string;
-}
-
-interface DigitalCardProps {
-  employeeData: EmployeeData;
-}
-
-const companyData = {
-  name: 'Somani Realtors',
-  workPhone: '033 40274027',
-  website: 'https://www.somanirealtors.com',
-  address:
-    'Somani Realtors Pvt Ltd, 40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020',
-  coordinates: {
-    lat: '22.5257',
-    lng: '88.3451',
-  },
-  socials: {
-    facebook: 'https://facebook.com/somanirealtors',
-    x: 'https://x.com/somani_realtors',
-    instagram: 'https://www.instagram.com/somanirealtors/',
-    linkedin: 'https://in.linkedin.com/company/somanirealtors',
-    youtube: 'https://www.youtube.com/c/SomaniRealtorsPvtLtd',
-  },
-};
-
-const generateVCard = (employeeData: EmployeeData) => {
+const generateVCard = ({
+  firstName,
+  lastName,
+  designation,
+  mobile,
+  email,
+}: any) => {
   const vCardData = `
 BEGIN:VCARD
 VERSION:3.0
-FN:${employeeData.firstName} ${employeeData.lastName}
-ORG:${companyData.name}
-TITLE:${employeeData.designation}
-TEL;TYPE=CELL:${employeeData.mobile}
-EMAIL:${employeeData.email}
-URL:${companyData.website}
-ADR;TYPE=WORK:${companyData.address}
+FN:${firstName} ${lastName}
+ORG:Somani Realtors
+TITLE:${designation}
+TEL;TYPE=CELL:${mobile}
+EMAIL:${email}
+URL:https://www.somanirealtors.com
+ADR;TYPE=WORK:Somani Realtors Pvt Ltd, 40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020
 END:VCARD
   `.trim();
 
-  const blob = new Blob([vCardData], { type: 'text/vcard' });
-  const url = URL.createObjectURL(blob);
-  return url;
+  const blob = new Blob([vCardData], { type: "text/vcard" });
+  return URL.createObjectURL(blob);
 };
 
-const DigitalCard = ({ employeeData }: DigitalCardProps) => {
+const DigitalCard = () => {
+  const employeeData = {
+    firstName: "Sumeet",
+    lastName: "Roy",
+    designation: "Assistant General Manager - Operations",
+    mobile: "+919830015606",
+    email: "sumeetroy@somanirealtors.com",
+    imageUrl:
+      "https://res.cloudinary.com/somani/image/upload/v1679093212/profile-pic.jpg",
+  };
+
+  const companyData = {
+    socials: {
+      facebook: "https://facebook.com/somanirealtors",
+      x: "https://x.com/somani_realtors",
+      instagram: "https://www.instagram.com/somanirealtors/",
+      linkedin: "https://in.linkedin.com/company/somanirealtors",
+      youtube: "https://www.youtube.com/c/SomaniRealtorsPvtLtd",
+    },
+  };
+
   const vCardUrl = generateVCard(employeeData);
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-      {/* Header with logo */}
-      <div className="flex justify-center items-center bg-white py-4 border-b">
+    <div className="bg-gradient-to-br from-white to-[#F9FAFB] max-w-md mx-auto rounded-lg shadow-lg border border-gray-100 overflow-hidden">
+      {/* Header */}
+      <div className="flex flex-col items-center bg-[#6F963F] py-6">
         <Image
           src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
           alt="Somani Realtors Logo"
-          width={150}
+          width={140}
           height={50}
           priority
         />
+        <p className="text-white text-sm mt-2 font-light">Home for All</p>
       </div>
 
-      {/* Employee details */}
-      <div className="px-6 py-6 text-center">
+      {/* Profile Section */}
+      <div className="text-center px-6 py-8">
         <Image
           src={employeeData.imageUrl}
           alt={`${employeeData.firstName} ${employeeData.lastName}`}
           width={100}
           height={100}
-          className="mx-auto rounded-full border-4 border-[#6F963F]"
-          priority
+          className="rounded-full border-4 border-[#37419A]"
         />
-        <h1 className="mt-4 text-xl font-semibold text-gray-800">
+        <h1 className="mt-4 text-2xl font-semibold text-gray-800">
           {employeeData.firstName} {employeeData.lastName}
         </h1>
-        <p className="text-sm text-gray-600">{employeeData.designation}</p>
-        <p className="mt-1 text-sm text-gray-500">{companyData.name}</p>
+        <p className="text-sm text-gray-500">{employeeData.designation}</p>
+        <p className="text-gray-400 mt-1">Somani Realtors</p>
       </div>
 
-      {/* Contact Information */}
-      <div className="px-6 py-4 space-y-4 text-sm text-gray-700">
+      {/* Contact Info */}
+      <div className="px-6 space-y-4 text-gray-700">
         <a
           href={`tel:${employeeData.mobile}`}
-          className="flex items-center gap-2 hover:text-[#6F963F] transition"
+          className="flex items-center gap-3 hover:text-[#6F963F] transition"
         >
           <PhoneIcon className="w-5 h-5 text-[#6F963F]" />
           {employeeData.mobile}
         </a>
         <a
           href={`mailto:${employeeData.email}`}
-          className="flex items-center gap-2 hover:text-[#6F963F] transition"
+          className="flex items-center gap-3 hover:text-[#6F963F] transition"
         >
           <MailIcon className="w-5 h-5 text-[#6F963F]" />
           {employeeData.email}
         </a>
         <a
-          href={companyData.website}
+          href="https://www.somanirealtors.com"
+          className="flex items-center gap-3 hover:text-[#6F963F] transition"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:text-[#6F963F] transition"
         >
           <GlobeIcon className="w-5 h-5 text-[#6F963F]" />
-          {companyData.website.replace('https://', '')}
-        </a>
-        <a
-          href={`tel:${companyData.workPhone}`}
-          className="flex items-center gap-2 hover:text-[#6F963F] transition"
-        >
-          <PhoneIcon className="w-5 h-5 text-[#6F963F]" />
-          {companyData.workPhone}
-        </a>
-        <a
-          href={`https://www.google.com/maps?q=${companyData.coordinates.lat},${companyData.coordinates.lng}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:text-[#6F963F] transition"
-        >
-          <MapPinIcon className="w-5 h-5 text-[#6F963F]" />
-          {companyData.address}
+          somanirealtors.com
         </a>
       </div>
 
-      {/* Add to Contacts */}
-      <div className="px-6 py-4 text-center">
+      {/* Add Contact */}
+      <div className="px-6 mt-6 mb-4 text-center">
         <a
           href={vCardUrl}
-          download={`${employeeData.firstName}_${employeeData.lastName}.vcf`}
-          className="px-4 py-2 bg-[#6F963F] text-white rounded-full hover:bg-[#37419A] transition"
+          download="Sumeet_Roy.vcf"
+          className="inline-block w-full bg-[#6F963F] text-white py-3 rounded-lg text-sm font-medium shadow-md hover:bg-[#37419A] transition"
         >
           Add to Contacts
         </a>
       </div>
 
       {/* Social Links */}
-      <div className="flex justify-center space-x-4 py-4 border-t">
+      <div className="flex justify-center space-x-5 py-6 border-t border-gray-100 bg-[#F9FAFB]">
         {Object.entries(companyData.socials).map(([platform, url]) => (
           <a
             key={platform}
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#6F963F] hover:text-[#37419A] transition"
+            className="text-gray-500 hover:text-[#6F963F] transition"
           >
-            {platform === 'facebook' && <FacebookIcon className="w-6 h-6" />}
-            {platform === 'x' && <XIcon className="w-6 h-6" />}
-            {platform === 'instagram' && <InstagramIcon className="w-6 h-6" />}
-            {platform === 'linkedin' && <LinkedinIcon className="w-6 h-6" />}
-            {platform === 'youtube' && <YoutubeIcon className="w-6 h-6" />}
+            {platform === "facebook" && <FacebookIcon className="w-5 h-5" />}
+            {platform === "x" && <XIcon className="w-5 h-5" />}
+            {platform === "instagram" && <InstagramIcon className="w-5 h-5" />}
+            {platform === "linkedin" && <LinkedinIcon className="w-5 h-5" />}
+            {platform === "youtube" && <YoutubeIcon className="w-5 h-5" />}
           </a>
         ))}
       </div>
