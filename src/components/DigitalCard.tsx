@@ -22,7 +22,14 @@ const XIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-import type { EmployeeData } from '@/data/employees';
+interface EmployeeData {
+  firstName: string;
+  lastName: string;
+  designation: string;
+  mobile: string;
+  email: string;
+  imageUrl: string;
+}
 
 interface DigitalCardProps {
   employeeData: EmployeeData;
@@ -47,7 +54,28 @@ const companyData = {
   },
 };
 
+const generateVCard = (employeeData: EmployeeData) => {
+  const vCardData = `
+BEGIN:VCARD
+VERSION:3.0
+FN:${employeeData.firstName} ${employeeData.lastName}
+ORG:${companyData.name}
+TITLE:${employeeData.designation}
+TEL;TYPE=CELL:${employeeData.mobile}
+EMAIL:${employeeData.email}
+URL:${companyData.website}
+ADR;TYPE=WORK:${companyData.address}
+END:VCARD
+  `.trim();
+
+  const blob = new Blob([vCardData], { type: 'text/vcard' });
+  const url = URL.createObjectURL(blob);
+  return url;
+};
+
 const DigitalCard = ({ employeeData }: DigitalCardProps) => {
+  const vCardUrl = generateVCard(employeeData);
+
   return (
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
       {/* Header with logo */}
@@ -68,7 +96,7 @@ const DigitalCard = ({ employeeData }: DigitalCardProps) => {
           alt={`${employeeData.firstName} ${employeeData.lastName}`}
           width={100}
           height={100}
-          className="mx-auto rounded-full border-4 border-6F963F"
+          className="mx-auto rounded-full border-4 border-[#6F963F]"
           priority
         />
         <h1 className="mt-4 text-xl font-semibold text-gray-800">
@@ -82,42 +110,53 @@ const DigitalCard = ({ employeeData }: DigitalCardProps) => {
       <div className="px-6 py-4 space-y-4 text-sm text-gray-700">
         <a
           href={`tel:${employeeData.mobile}`}
-          className="flex items-center gap-2 hover:text-6F963F transition"
+          className="flex items-center gap-2 hover:text-[#6F963F] transition"
         >
-          <PhoneIcon className="w-5 h-5 text-6F963F" />
+          <PhoneIcon className="w-5 h-5 text-[#6F963F]" />
           {employeeData.mobile}
         </a>
         <a
           href={`mailto:${employeeData.email}`}
-          className="flex items-center gap-2 hover:text-6F963F transition"
+          className="flex items-center gap-2 hover:text-[#6F963F] transition"
         >
-          <MailIcon className="w-5 h-5 text-6F963F" />
+          <MailIcon className="w-5 h-5 text-[#6F963F]" />
           {employeeData.email}
         </a>
         <a
           href={companyData.website}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:text-6F963F transition"
+          className="flex items-center gap-2 hover:text-[#6F963F] transition"
         >
-          <GlobeIcon className="w-5 h-5 text-6F963F" />
+          <GlobeIcon className="w-5 h-5 text-[#6F963F]" />
           {companyData.website.replace('https://', '')}
         </a>
         <a
           href={`tel:${companyData.workPhone}`}
-          className="flex items-center gap-2 hover:text-6F963F transition"
+          className="flex items-center gap-2 hover:text-[#6F963F] transition"
         >
-          <PhoneIcon className="w-5 h-5 text-6F963F" />
+          <PhoneIcon className="w-5 h-5 text-[#6F963F]" />
           {companyData.workPhone}
         </a>
         <a
           href={`https://www.google.com/maps?q=${companyData.coordinates.lat},${companyData.coordinates.lng}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:text-6F963F transition"
+          className="flex items-center gap-2 hover:text-[#6F963F] transition"
         >
-          <MapPinIcon className="w-5 h-5 text-6F963F" />
+          <MapPinIcon className="w-5 h-5 text-[#6F963F]" />
           {companyData.address}
+        </a>
+      </div>
+
+      {/* Add to Contacts */}
+      <div className="px-6 py-4 text-center">
+        <a
+          href={vCardUrl}
+          download={`${employeeData.firstName}_${employeeData.lastName}.vcf`}
+          className="px-4 py-2 bg-[#6F963F] text-white rounded-full hover:bg-[#37419A] transition"
+        >
+          Add to Contacts
         </a>
       </div>
 
@@ -129,7 +168,7 @@ const DigitalCard = ({ employeeData }: DigitalCardProps) => {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-6F963F hover:text-37419A transition"
+            className="text-[#6F963F] hover:text-[#37419A] transition"
           >
             {platform === 'facebook' && <FacebookIcon className="w-6 h-6" />}
             {platform === 'x' && <XIcon className="w-6 h-6" />}
