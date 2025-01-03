@@ -3,13 +3,12 @@ import Image from 'next/image';
 import {
   PhoneIcon,
   MailIcon,
-  SaveIcon,
-  GlobeIcon,
   MapPinIcon,
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
   YoutubeIcon,
+  GlobeIcon,
 } from 'lucide-react';
 
 const XIcon = ({ className }: { className?: string }) => (
@@ -32,7 +31,7 @@ interface DigitalCardProps {
 const companyData = {
   name: 'Somani Realtors',
   workPhone: '033 40274027',
-  website: 'www.somanirealtors.com',
+  website: 'https://www.somanirealtors.com',
   address:
     'Somani Realtors Pvt Ltd, 40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020',
   coordinates: {
@@ -49,42 +48,10 @@ const companyData = {
 };
 
 const DigitalCard = ({ employeeData }: DigitalCardProps) => {
-  const handleSaveContact = async () => {
-    try {
-      const vCard = `BEGIN:VCARD
-VERSION:3.0
-N:${employeeData.lastName};${employeeData.firstName};;;
-FN:${employeeData.firstName} ${employeeData.lastName}
-ORG:${companyData.name}
-TITLE:${employeeData.designation}
-TEL;TYPE=CELL:${employeeData.mobile}
-TEL;TYPE=WORK:${companyData.workPhone}
-EMAIL:${employeeData.email}
-ADR:;;${companyData.address}
-URL:${companyData.website}
-END:VCARD`;
-
-      const blob = new Blob([vCard], { type: 'text/vcard' });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute(
-        'download',
-        `${employeeData.firstName}_${employeeData.lastName}_Somani.vcf`
-      );
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Error creating vCard:', error);
-    }
-  };
-
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-6F963F">
+    <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
       {/* Header with logo */}
-      <div className="flex justify-center items-center bg-white py-4">
+      <div className="flex justify-center items-center bg-white py-4 border-b">
         <Image
           src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
           alt="Somani Realtors Logo"
@@ -95,81 +62,82 @@ END:VCARD`;
       </div>
 
       {/* Employee details */}
-      <div className="px-4 py-6 text-center">
+      <div className="px-6 py-6 text-center">
         <Image
           src={employeeData.imageUrl}
           alt={`${employeeData.firstName} ${employeeData.lastName}`}
-          width={80}
-          height={80}
-          className="mx-auto rounded-full border-2 border-6F963F"
+          width={100}
+          height={100}
+          className="mx-auto rounded-full border-4 border-6F963F"
           priority
         />
-        <h1 className="mt-4 text-lg font-bold text-gray-800">
+        <h1 className="mt-4 text-xl font-semibold text-gray-800">
           {employeeData.firstName} {employeeData.lastName}
         </h1>
         <p className="text-sm text-gray-600">{employeeData.designation}</p>
-        <p className="mt-1 text-xs text-gray-500">{companyData.name}</p>
+        <p className="mt-1 text-sm text-gray-500">{companyData.name}</p>
       </div>
 
       {/* Contact Information */}
-      <div className="px-4 space-y-2">
-        <div className="flex items-center gap-3 text-gray-700">
-          <PhoneIcon className="w-5 h-5 text-37419A" />
-          <span>{employeeData.mobile}</span>
-        </div>
-        <div className="flex items-center gap-3 text-gray-700">
-          <MailIcon className="w-5 h-5 text-37419A" />
-          <span>{employeeData.email}</span>
-        </div>
-        <div className="flex items-center gap-3 text-gray-700">
-          <GlobeIcon className="w-5 h-5 text-37419A" />
-          <a
-            href={`https://${companyData.website}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >
-            {companyData.website}
-          </a>
-        </div>
-        <div className="flex items-center gap-3 text-gray-700">
-          <PhoneIcon className="w-5 h-5 text-37419A" />
-          <span>{companyData.workPhone}</span>
-        </div>
-        <div className="flex items-center gap-3 text-gray-700">
-          <MapPinIcon className="w-5 h-5 text-37419A" />
-          <span>{companyData.address}</span>
-        </div>
+      <div className="px-6 py-4 space-y-4 text-sm text-gray-700">
+        <a
+          href={`tel:${employeeData.mobile}`}
+          className="flex items-center gap-2 hover:text-6F963F transition"
+        >
+          <PhoneIcon className="w-5 h-5 text-6F963F" />
+          {employeeData.mobile}
+        </a>
+        <a
+          href={`mailto:${employeeData.email}`}
+          className="flex items-center gap-2 hover:text-6F963F transition"
+        >
+          <MailIcon className="w-5 h-5 text-6F963F" />
+          {employeeData.email}
+        </a>
+        <a
+          href={companyData.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 hover:text-6F963F transition"
+        >
+          <GlobeIcon className="w-5 h-5 text-6F963F" />
+          {companyData.website.replace('https://', '')}
+        </a>
+        <a
+          href={`tel:${companyData.workPhone}`}
+          className="flex items-center gap-2 hover:text-6F963F transition"
+        >
+          <PhoneIcon className="w-5 h-5 text-6F963F" />
+          {companyData.workPhone}
+        </a>
+        <a
+          href={`https://www.google.com/maps?q=${companyData.coordinates.lat},${companyData.coordinates.lng}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 hover:text-6F963F transition"
+        >
+          <MapPinIcon className="w-5 h-5 text-6F963F" />
+          {companyData.address}
+        </a>
       </div>
 
       {/* Social Links */}
-      <div className="flex justify-center space-x-4 mt-4 px-4">
+      <div className="flex justify-center space-x-4 py-4 border-t">
         {Object.entries(companyData.socials).map(([platform, url]) => (
           <a
             key={platform}
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-37419A hover:text-6F963F transition"
+            className="text-6F963F hover:text-37419A transition"
           >
-            {platform === 'facebook' && <FacebookIcon className="w-5 h-5" />}
-            {platform === 'x' && <XIcon className="w-5 h-5" />}
-            {platform === 'instagram' && <InstagramIcon className="w-5 h-5" />}
-            {platform === 'linkedin' && <LinkedinIcon className="w-5 h-5" />}
-            {platform === 'youtube' && <YoutubeIcon className="w-5 h-5" />}
+            {platform === 'facebook' && <FacebookIcon className="w-6 h-6" />}
+            {platform === 'x' && <XIcon className="w-6 h-6" />}
+            {platform === 'instagram' && <InstagramIcon className="w-6 h-6" />}
+            {platform === 'linkedin' && <LinkedinIcon className="w-6 h-6" />}
+            {platform === 'youtube' && <YoutubeIcon className="w-6 h-6" />}
           </a>
         ))}
-      </div>
-
-      {/* Save Contact Button */}
-      <div className="px-4 mt-6 pb-4">
-        <button
-          onClick={handleSaveContact}
-          className="w-full bg-37419A text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-6F963F transition"
-        >
-          <SaveIcon className="w-5 h-5" />
-          <span>Save Contact</span>
-        </button>
       </div>
     </div>
   );
