@@ -21,41 +21,21 @@ const XIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const generateVCard = (data: {
+// Define the type for employeeData prop
+interface EmployeeData {
   firstName: string;
   lastName: string;
   designation: string;
   mobile: string;
   email: string;
-}) => {
-  const vCardData = `
-BEGIN:VCARD
-VERSION:3.0
-FN:${data.firstName} ${data.lastName}
-ORG:Somani Realtors
-TITLE:${data.designation}
-TEL;TYPE=CELL:${data.mobile}
-EMAIL:${data.email}
-URL:https://www.somanirealtors.com
-ADR;TYPE=WORK:Somani Realtors Pvt Ltd, 40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020
-END:VCARD
-  `.trim();
+  imageUrl: string;
+}
 
-  const blob = new Blob([vCardData], { type: "text/vcard" });
-  return URL.createObjectURL(blob);
-};
+interface DigitalCardProps {
+  employeeData: EmployeeData;
+}
 
-const DigitalCard = () => {
-  const employeeData = {
-    firstName: "Sumeet",
-    lastName: "Roy",
-    designation: "Assistant General Manager - Operations",
-    mobile: "+919830015606",
-    email: "sumeetroy@somanirealtors.com",
-    imageUrl:
-      "https://res.cloudinary.com/somani/image/upload/v1679093212/profile-pic.jpg",
-  };
-
+const DigitalCard: React.FC<DigitalCardProps> = ({ employeeData }) => {
   const companyData = {
     socials: {
       facebook: "https://facebook.com/somanirealtors",
@@ -65,8 +45,6 @@ const DigitalCard = () => {
       youtube: "https://www.youtube.com/c/SomaniRealtorsPvtLtd",
     },
   };
-
-  const vCardUrl = generateVCard(employeeData);
 
   return (
     <div className="bg-gradient-to-br from-white to-[#F9FAFB] max-w-md mx-auto rounded-lg shadow-lg border border-gray-100 overflow-hidden">
@@ -122,17 +100,6 @@ const DigitalCard = () => {
         >
           <GlobeIcon className="w-5 h-5 text-[#CF963F]" />
           somanirealtors.com
-        </a>
-      </div>
-
-      {/* Add Contact */}
-      <div className="px-6 mt-6 mb-4 text-center">
-        <a
-          href={vCardUrl}
-          download="Sumeet_Roy.vcf"
-          className="inline-block w-full bg-[#CF963F] text-white py-3 rounded-lg text-sm font-medium shadow-md hover:bg-[#37419A] transition"
-        >
-          Add to Contacts
         </a>
       </div>
 
