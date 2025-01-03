@@ -3,7 +3,6 @@ import Image from "next/image";
 import {
   PhoneIcon,
   MailIcon,
-  MapPinIcon,
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
@@ -22,21 +21,21 @@ const XIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const generateVCard = ({
-  firstName,
-  lastName,
-  designation,
-  mobile,
-  email,
-}: any) => {
+const generateVCard = (data: {
+  firstName: string;
+  lastName: string;
+  designation: string;
+  mobile: string;
+  email: string;
+}) => {
   const vCardData = `
 BEGIN:VCARD
 VERSION:3.0
-FN:${firstName} ${lastName}
+FN:${data.firstName} ${data.lastName}
 ORG:Somani Realtors
-TITLE:${designation}
-TEL;TYPE=CELL:${mobile}
-EMAIL:${email}
+TITLE:${data.designation}
+TEL;TYPE=CELL:${data.mobile}
+EMAIL:${data.email}
 URL:https://www.somanirealtors.com
 ADR;TYPE=WORK:Somani Realtors Pvt Ltd, 40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020
 END:VCARD
@@ -72,7 +71,7 @@ const DigitalCard = () => {
   return (
     <div className="bg-gradient-to-br from-white to-[#F9FAFB] max-w-md mx-auto rounded-lg shadow-lg border border-gray-100 overflow-hidden">
       {/* Header */}
-      <div className="flex flex-col items-center bg-[#6F963F] py-6">
+      <div className="flex flex-col items-center bg-[#CF963F] py-6">
         <Image
           src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
           alt="Somani Realtors Logo"
@@ -103,25 +102,25 @@ const DigitalCard = () => {
       <div className="px-6 space-y-4 text-gray-700">
         <a
           href={`tel:${employeeData.mobile}`}
-          className="flex items-center gap-3 hover:text-[#6F963F] transition"
+          className="flex items-center gap-3 hover:text-[#CF963F] transition"
         >
-          <PhoneIcon className="w-5 h-5 text-[#6F963F]" />
+          <PhoneIcon className="w-5 h-5 text-[#CF963F]" />
           {employeeData.mobile}
         </a>
         <a
           href={`mailto:${employeeData.email}`}
-          className="flex items-center gap-3 hover:text-[#6F963F] transition"
+          className="flex items-center gap-3 hover:text-[#CF963F] transition"
         >
-          <MailIcon className="w-5 h-5 text-[#6F963F]" />
+          <MailIcon className="w-5 h-5 text-[#CF963F]" />
           {employeeData.email}
         </a>
         <a
           href="https://www.somanirealtors.com"
-          className="flex items-center gap-3 hover:text-[#6F963F] transition"
+          className="flex items-center gap-3 hover:text-[#CF963F] transition"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <GlobeIcon className="w-5 h-5 text-[#6F963F]" />
+          <GlobeIcon className="w-5 h-5 text-[#CF963F]" />
           somanirealtors.com
         </a>
       </div>
@@ -131,7 +130,7 @@ const DigitalCard = () => {
         <a
           href={vCardUrl}
           download="Sumeet_Roy.vcf"
-          className="inline-block w-full bg-[#6F963F] text-white py-3 rounded-lg text-sm font-medium shadow-md hover:bg-[#37419A] transition"
+          className="inline-block w-full bg-[#CF963F] text-white py-3 rounded-lg text-sm font-medium shadow-md hover:bg-[#37419A] transition"
         >
           Add to Contacts
         </a>
@@ -145,7 +144,7 @@ const DigitalCard = () => {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-500 hover:text-[#6F963F] transition"
+            className="text-gray-500 hover:text-[#CF963F] transition"
           >
             {platform === "facebook" && <FacebookIcon className="w-5 h-5" />}
             {platform === "x" && <XIcon className="w-5 h-5" />}
