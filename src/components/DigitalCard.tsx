@@ -5,7 +5,6 @@ import {
   MailIcon,
   SaveIcon,
   MapPinIcon,
-  GlobeIcon,
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
