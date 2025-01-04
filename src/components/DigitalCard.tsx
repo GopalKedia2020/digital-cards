@@ -49,20 +49,20 @@ const companyData = {
 
 const LogoHeader = () => {
   return (
-    <div className="absolute top-4 left-0 right-0 flex justify-between items-center px-6">
+    <div className="absolute top-4 left-0 right-0 flex justify-between px-6">
       <Image 
-        src="/34years.png"
-        alt="34 Years of Service"
-        width={100}
-        height={100}
+        src="/24x7.png"
+        alt="24x7 Service"
+        width={60}
+        height={60}
         className="object-contain"
         priority
       />
       <Image 
         src="/somani-logo.png"
         alt="Somani Realtors"
-        width={100}
-        height={100}
+        width={60}
+        height={60}
         className="object-contain"
         priority
       />
