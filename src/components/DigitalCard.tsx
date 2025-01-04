@@ -25,6 +25,8 @@ const XIcon = React.forwardRef<SVGSVGElement, { className?: string }>(
   )
 );
 
+XIcon.displayName = 'XIcon';
+
 interface EmployeeData {
   firstName: string;
   lastName: string;
@@ -125,7 +127,7 @@ END:VCARD`;
 
   const getContactButton = (
     href: string,
-    icon: React.ReactElement<any>,
+    icon: React.ReactElement<{ className?: string }>,
     primary: string,
     secondary?: string
   ) => (
