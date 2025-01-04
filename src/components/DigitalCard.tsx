@@ -127,7 +127,7 @@ END:VCARD`
               height={64}
               priority
               unoptimized
-              className="h-16 w-auto"
+              className="h-20 w-auto"
             />
           </div>
 
@@ -140,7 +140,7 @@ END:VCARD`
               height={56}
               priority
               unoptimized
-              className="h-18 w-auto"
+              className="h-24 w-auto"
             />
           </div>
         </div>
