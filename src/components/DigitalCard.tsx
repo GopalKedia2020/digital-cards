@@ -1,5 +1,5 @@
-import React from 'react'
-import Image from 'next/image'
+import React from 'react';
+import Image from 'next/image';
 import { 
   PhoneIcon, 
   MailIcon, 
@@ -9,7 +9,7 @@ import {
   InstagramIcon,
   LinkedinIcon,
   YoutubeIcon
-} from 'lucide-react'
+} from 'lucide-react';
 
 const XIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -20,12 +20,19 @@ const XIcon = ({ className }: { className?: string }) => (
   >
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
-)
+);
 
-import type { EmployeeData } from '@/data/employees'
+interface EmployeeData {
+  firstName: string;
+  lastName: string;
+  designation: string;
+  mobile: string;
+  email: string;
+  imageUrl: string;
+}
 
 interface DigitalCardProps {
-  employeeData: EmployeeData
+  employeeData: EmployeeData;
 }
 
 const companyData = {
@@ -44,35 +51,35 @@ const companyData = {
     linkedin: "https://in.linkedin.com/company/somanirealtors",
     youtube: "https://www.youtube.com/c/SomaniRealtorsPvtLtd"
   }
-}
+};
 
 const DigitalCard = ({ employeeData }: DigitalCardProps) => {
   const getBase64Image = async (imageUrl: string): Promise<string> => {
     try {
-      const response = await fetch(imageUrl)
-      const blob = await response.blob()
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
       return new Promise((resolve, reject) => {
-        const reader = new FileReader()
+        const reader = new FileReader();
         reader.onloadend = () => {
           if (typeof reader.result === 'string') {
-            const base64String = reader.result.split(',')[1]
-            resolve(base64String)
+            const base64String = reader.result.split(',')[1];
+            resolve(base64String);
           } else {
-            reject(new Error('Failed to convert image to base64'))
+            reject(new Error('Failed to convert image to base64'));
           }
-        }
-        reader.onerror = reject
-        reader.readAsDataURL(blob)
-      })
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
     } catch (error) {
-      console.error('Error converting image to base64:', error)
-      return ''
+      console.error('Error converting image to base64:', error);
+      return '';
     }
-  }
+  };
 
   const handleSaveContact = async () => {
     try {
-      const photoData = employeeData.imageUrl ? await getBase64Image(employeeData.imageUrl) : ''
+      const photoData = employeeData.imageUrl ? await getBase64Image(employeeData.imageUrl) : '';
       
       const vCard = `BEGIN:VCARD
 VERSION:3.0
@@ -92,34 +99,34 @@ URL;type=Instagram:${companyData.socials.instagram}
 URL;type=YouTube:${companyData.socials.youtube}
 GEO:${companyData.coordinates.lat},${companyData.coordinates.lng}${photoData ? `
 PHOTO;ENCODING=b;TYPE=JPEG:${photoData}` : ''}
-END:VCARD`
+END:VCARD`;
 
-      const blob = new Blob([vCard], { type: 'text/vcard' })
-      const url = window.URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.setAttribute('download', `${employeeData.firstName}_${employeeData.lastName}_Somani.vcf`)
-      document.body.appendChild(link)
-      link.click()
-      link.remove()
-      window.URL.revokeObjectURL(url)
+      const blob = new Blob([vCard], { type: 'text/vcard' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${employeeData.firstName}_${employeeData.lastName}_Somani.vcf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error creating vCard:', error)
+      console.error('Error creating vCard:', error);
     }
-  }
+  };
 
   const getMapsUrl = () => {
-    const query = encodeURIComponent(companyData.address)
-    return `https://www.google.com/maps/search/?api=1&query=${query}`
-  }
+    const query = encodeURIComponent(companyData.address);
+    return `https://www.google.com/maps/search/?api=1&query=${query}`;
+  };
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
       {/* Top Section with White Background */}
-      <div className="bg-white pt-4 pb-16 px-6 relative">
-        <div className="flex justify-between items-start mb-2">
+      <div className="bg-white pt-2 pb-12 px-6 relative">
+        <div className="flex justify-between items-start">
           {/* 34 Years Logo */}
-          <div className="w-48">
+          <div className="w-48 mt-3">
             <Image 
               src="https://res.cloudinary.com/somani/image/upload/v1735978151/PC_34yrs_b3hyde.png"
               alt="34 Years Logo"
@@ -161,18 +168,18 @@ END:VCARD`
       </div>
 
       {/* Bottom Section with Blue Background */}
-      <div className="bg-[#37419A] pt-16 pb-4 px-6">
+      <div className="bg-[#37419A] pt-14 pb-3 px-6">
         <h1 className="text-xl font-bold text-center text-white">
           {employeeData.firstName} {employeeData.lastName}
         </h1>
-        <p className="text-center mt-1 mb-4 text-sm text-gray-200">
+        <p className="text-center text-sm text-gray-200 mb-3">
           {employeeData.designation}
         </p>
         
-        <div className="mt-4 space-y-2">
+        <div className="space-y-2">
           <a 
             href={`tel:${employeeData.mobile}`} 
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+            className="flex items-center gap-3 p-2 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
           >
             <PhoneIcon className="w-5 h-5 text-white flex-shrink-0" />
             <div>
@@ -183,7 +190,7 @@ END:VCARD`
 
           <a 
             href={`tel:${companyData.workPhone}`} 
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+            className="flex items-center gap-3 p-2 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
           >
             <PhoneIcon className="w-5 h-5 text-white flex-shrink-0" />
             <div>
@@ -194,7 +201,7 @@ END:VCARD`
 
           <a 
             href={`mailto:${employeeData.email}`} 
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+            className="flex items-center gap-3 p-2 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
           >
             <MailIcon className="w-5 h-5 text-white flex-shrink-0" />
             <span className="text-white text-sm break-all">{employeeData.email}</span>
@@ -204,7 +211,7 @@ END:VCARD`
             href={getMapsUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+            className="flex items-center gap-3 p-2 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
           >
             <MapPinIcon className="w-5 h-5 text-white flex-shrink-0" />
             <div>
@@ -214,7 +221,7 @@ END:VCARD`
           </a>
         </div>
 
-        <div className="mt-4 flex justify-center gap-6">
+        <div className="mt-3 flex justify-center gap-6">
           <a 
             href={companyData.socials.facebook} 
             target="_blank" 
@@ -257,20 +264,20 @@ END:VCARD`
           </a>
         </div>
 
-        <div className="mt-3 text-center">
+        <div className="mt-2 text-center">
           <p className="text-sm text-white">{companyData.website}</p>
         </div>
 
         <button
           onClick={handleSaveContact}
-          className="w-full mt-3 bg-[#CF963F] text-white py-3 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-[#b17d2f] transition-colors"
+          className="w-full mt-2 bg-[#CF963F] text-white py-2 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-[#b17d2f] transition-colors"
         >
           <SaveIcon className="w-5 h-5" />
           <span>Save Contact</span>
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DigitalCard
+export default DigitalCard;
