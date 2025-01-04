@@ -179,7 +179,7 @@ export default function Home() {
                 </a>
                 <a href="https://x.com/somani_realtors" target="_blank" rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors">
-                    <XIcon className="w-5 h-5" />
+                    <XIcon className="w-6 h-6" />
                 </a>
                 <a href="https://linkedin.com/company/somanirealtors" target="_blank" rel="noopener noreferrer"
                    className="text-gray-400 hover:text-white transition-colors">
