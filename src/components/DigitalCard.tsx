@@ -5,6 +5,7 @@ import {
   MailIcon,
   SaveIcon,
   MapPinIcon,
+  GlobeIcon,
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
@@ -111,20 +112,36 @@ END:VCARD`
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
       {/* Header Section */}
-      <div className="bg-gradient-to-r from-[#37419A] to-[#CF963F] p-6 flex flex-col items-center">
+      <div className="flex justify-between items-center bg-white p-6">
         <Image
           src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
           alt="Somani Realtors Logo"
           width={150}
           height={50}
-          className="mb-4"
+          priority
+        />
+        <Image
+          src="https://res.cloudinary.com/somani/image/upload/v1730982022/34-Year-Logo.png"
+          alt="34-Year Logo"
+          width={100}
+          height={50}
           priority
         />
       </div>
 
       {/* Employee Details */}
       <div className="px-6 pt-6 pb-8">
-        <h1 className="text-2xl font-bold text-center text-gray-900">
+        <div className="flex justify-center">
+          <Image
+            src={employeeData.imageUrl}
+            alt={`${employeeData.firstName} ${employeeData.lastName}`}
+            width={100}
+            height={100}
+            className="rounded-full border-4 border-gray-300 shadow-lg"
+            priority
+          />
+        </div>
+        <h1 className="text-2xl font-bold text-center text-gray-900 mt-4">
           {employeeData.firstName} {employeeData.lastName}
         </h1>
         <p className="text-center text-gray-600 mt-2">{employeeData.designation}</p>
