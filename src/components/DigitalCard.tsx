@@ -5,6 +5,7 @@ import {
   MailIcon, 
   SaveIcon, 
   MapPinIcon, 
+  GlobeIcon,
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
@@ -32,7 +33,7 @@ const companyData = {
   name: "Somani Realtors",
   workPhone: "033 40274027",
   website: "www.somanirealtors.com",
-  address: "Somani Realtors Pvt Ltd, 40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020",
+  address: "Somani Realtors, 2nd Floor, 40, Ashutosh Mukherjee Rd, Bhowanipore, Kolkata, West Bengal 700020",
   coordinates: {
     lat: "22.5257",
     lng: "88.3451"
@@ -44,6 +45,29 @@ const companyData = {
     linkedin: "https://in.linkedin.com/company/somanirealtors",
     youtube: "https://www.youtube.com/c/SomaniRealtorsPvtLtd"
   }
+}
+
+const LogoHeader = () => {
+  return (
+    <div className="absolute top-4 left-0 right-0 flex justify-between px-6">
+      <Image 
+        src="/24x7.png"
+        alt="24x7 Service"
+        width={60}
+        height={60}
+        className="object-contain"
+        priority
+      />
+      <Image 
+        src="/somani-logo.png"
+        alt="Somani Realtors"
+        width={60}
+        height={60}
+        className="object-contain"
+        priority
+      />
+    </div>
+  )
 }
 
 const DigitalCard = ({ employeeData }: DigitalCardProps) => {
@@ -115,154 +139,137 @@ END:VCARD`
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
-      {/* Top Section with White Background */}
-      <div className="bg-white pt-6 pb-20 px-6 relative">
-        <div className="flex justify-between items-start mb-4">
-          {/* Company Logo */}
-          <div className="w-32">
-            <Image 
-              src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
-              alt="Somani Realtors Logo"
-              width={128}
-              height={32}
-              priority
-              className="h-8 w-auto"
-            />
-          </div>
-
-          {/* 34 Years Logo */}
-          <div className="w-32">
-            <Image 
-              src="https://res.cloudinary.com/somani/image/upload/v1735978151/PC_34yrs_b3hyde.png"
-              alt="34 Years Logo"
-              width={128}
-              height={32}
-              priority
-              unoptimized
-              className="h-8 w-auto"
-            />
-          </div>
-        </div>
-
-        {/* Profile Image - Positioned to overlap sections */}
-        <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#37419A]">
-            <Image 
-              src={employeeData.imageUrl}
-              alt={`${employeeData.firstName} ${employeeData.lastName}`}
-              width={128}
-              height={128}
-              className="rounded-full object-cover"
-              priority
-            />
-          </div>
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 h-32 flex items-center justify-center relative">
+        <LogoHeader />
+        <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white shadow-md transform translate-y-16">
+          <Image 
+            src={employeeData.imageUrl}
+            alt={`${employeeData.firstName} ${employeeData.lastName}`}
+            width={128}
+            height={128}
+            className="rounded-full object-cover"
+            priority
+          />
         </div>
       </div>
 
-      {/* Bottom Section with Blue Background */}
-      <div className="bg-[#37419A] pt-20 pb-6 px-6">
-        <h1 className="text-xl font-bold text-center text-white">
+      <div className="px-6 pt-20 pb-8">
+        <h1 className="text-2xl font-bold text-center text-gray-900">
           {employeeData.firstName} {employeeData.lastName}
         </h1>
-        <p className="text-center mt-1 text-sm text-gray-200">
+        <p className="text-center text-gray-600 mt-2">
           {employeeData.designation}
         </p>
+        <p className="text-center text-blue-600 font-medium mt-1">
+          {companyData.name}
+        </p>
         
-        <div className="mt-6 space-y-3">
+        <div className="mt-8 space-y-3">
           <a 
             href={`tel:${employeeData.mobile}`} 
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
           >
-            <PhoneIcon className="w-5 h-5 text-white flex-shrink-0" />
+            <PhoneIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
             <div>
-              <span className="text-white text-sm">{employeeData.mobile}</span>
-              <span className="text-xs text-gray-200 block">Mobile</span>
+              <span className="text-gray-700">{employeeData.mobile}</span>
+              <span className="text-sm text-gray-500 block">Mobile</span>
             </div>
           </a>
 
           <a 
             href={`tel:${companyData.workPhone}`} 
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
           >
-            <PhoneIcon className="w-5 h-5 text-white flex-shrink-0" />
+            <PhoneIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
             <div>
-              <span className="text-white text-sm">{companyData.workPhone}</span>
-              <span className="text-xs text-gray-200 block">Office</span>
+              <span className="text-gray-700">{companyData.workPhone}</span>
+              <span className="text-sm text-gray-500 block">Office</span>
             </div>
           </a>
 
           <a 
             href={`mailto:${employeeData.email}`} 
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
           >
-            <MailIcon className="w-5 h-5 text-white flex-shrink-0" />
-            <span className="text-white text-sm break-all">{employeeData.email}</span>
+            <MailIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <span className="text-gray-700 break-all">{employeeData.email}</span>
+          </a>
+
+          <a 
+            href={`https://${companyData.website}`}
+            target="_blank"
+            rel="noopener noreferrer" 
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+          >
+            <GlobeIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <span className="text-gray-700">{companyData.website}</span>
           </a>
 
           <a 
             href={getMapsUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group"
           >
-            <MapPinIcon className="w-5 h-5 text-white flex-shrink-0" />
+            <MapPinIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
             <div>
-              <span className="text-sm text-white">{companyData.address}</span>
-              <span className="text-xs text-[#CF963F] block hover:underline">Open in Google Maps</span>
+              <span className="text-gray-700 text-sm">{companyData.address}</span>
+              <span className="text-sm text-blue-600 block group-hover:underline">Open in Google Maps</span>
             </div>
           </a>
         </div>
 
-        <div className="mt-6 flex justify-center gap-6">
+        <div className="mt-8 flex justify-center gap-4">
           <a 
             href={companyData.socials.facebook} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-white hover:text-[#CF963F] transition-colors"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="Facebook"
           >
-            <FacebookIcon className="w-5 h-5" />
+            <FacebookIcon className="w-6 h-6" />
           </a>
           <a 
             href={companyData.socials.x}
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-white hover:text-[#CF963F] transition-colors"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="X"
           >
-            <XIcon className="w-4 h-4" />
+            <XIcon className="w-5 h-5" />
           </a>
           <a 
             href={companyData.socials.instagram} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-white hover:text-[#CF963F] transition-colors"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="Instagram"
           >
-            <InstagramIcon className="w-5 h-5" />
+            <InstagramIcon className="w-6 h-6" />
           </a>
           <a 
             href={companyData.socials.linkedin} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-white hover:text-[#CF963F] transition-colors"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="LinkedIn"
           >
-            <LinkedinIcon className="w-5 h-5" />
+            <LinkedinIcon className="w-6 h-6" />
           </a>
           <a 
             href={companyData.socials.youtube} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-white hover:text-[#CF963F] transition-colors"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="YouTube"
           >
-            <YoutubeIcon className="w-5 h-5" />
+            <YoutubeIcon className="w-6 h-6" />
           </a>
-        </div>
-
-        <div className="mt-4 text-center">
-          <p className="text-sm text-white">{companyData.website}</p>
         </div>
 
         <button
           onClick={handleSaveContact}
-          className="w-full mt-4 bg-[#CF963F] text-white py-3 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-[#b17d2f] transition-colors"
+          className="w-full mt-8 bg-blue-600 text-white py-4 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors font-medium shadow-sm"
         >
           <SaveIcon className="w-5 h-5" />
           <span>Save Contact</span>
