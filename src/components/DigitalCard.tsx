@@ -116,7 +116,31 @@ END:VCARD`
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 h-32 flex items-center justify-center">
+      {/* Company Logo and Anniversary Section */}
+      <div className="bg-white pt-4 px-4">
+        <div className="flex justify-center">
+          <Image 
+            src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
+            alt="Somani Realtors Logo"
+            width={200}
+            height={60}
+            priority
+          />
+        </div>
+        <div className="text-center mt-2">
+          <p className="text-[#CF963F] font-semibold">Celebrating</p>
+          <Image 
+            src="https://res.cloudinary.com/somani/image/upload/v1735973297/34_yrs_logo_t6fsjv.png"
+            alt="34 Years Logo"
+            width={100}
+            height={40}
+            className="mx-auto"
+          />
+        </div>
+      </div>
+
+      {/* Header with Profile Picture */}
+      <div className="bg-gradient-to-r from-[#37419A] to-[#CF963F] h-32 flex items-center justify-center mt-4">
         <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white shadow-md transform translate-y-16">
           <Image 
             src={employeeData.imageUrl}
@@ -136,16 +160,13 @@ END:VCARD`
         <p className="text-center text-gray-600 mt-2">
           {employeeData.designation}
         </p>
-        <p className="text-center text-blue-600 font-medium mt-1">
-          {companyData.name}
-        </p>
         
         <div className="mt-8 space-y-3">
           <a 
             href={`tel:${employeeData.mobile}`} 
             className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
           >
-            <PhoneIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <PhoneIcon className="w-5 h-5 text-[#37419A] flex-shrink-0" />
             <div>
               <span className="text-gray-700">{employeeData.mobile}</span>
               <span className="text-sm text-gray-500 block">Mobile</span>
@@ -156,7 +177,7 @@ END:VCARD`
             href={`tel:${companyData.workPhone}`} 
             className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
           >
-            <PhoneIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <PhoneIcon className="w-5 h-5 text-[#37419A] flex-shrink-0" />
             <div>
               <span className="text-gray-700">{companyData.workPhone}</span>
               <span className="text-sm text-gray-500 block">Office</span>
@@ -167,7 +188,7 @@ END:VCARD`
             href={`mailto:${employeeData.email}`} 
             className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
           >
-            <MailIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <MailIcon className="w-5 h-5 text-[#37419A] flex-shrink-0" />
             <span className="text-gray-700 break-all">{employeeData.email}</span>
           </a>
 
@@ -177,7 +198,7 @@ END:VCARD`
             rel="noopener noreferrer" 
             className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
           >
-            <GlobeIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <GlobeIcon className="w-5 h-5 text-[#37419A] flex-shrink-0" />
             <span className="text-gray-700">{companyData.website}</span>
           </a>
 
@@ -187,10 +208,10 @@ END:VCARD`
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group"
           >
-            <MapPinIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <MapPinIcon className="w-5 h-5 text-[#37419A] flex-shrink-0" />
             <div>
               <span className="text-gray-700 text-sm">{companyData.address}</span>
-              <span className="text-sm text-blue-600 block group-hover:underline">Open in Google Maps</span>
+              <span className="text-sm text-[#37419A] block group-hover:underline">Open in Google Maps</span>
             </div>
           </a>
         </div>
@@ -200,7 +221,7 @@ END:VCARD`
             href={companyData.socials.facebook} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-blue-600 hover:text-blue-700 transition-colors"
+            className="text-[#37419A] hover:text-[#CF963F] transition-colors"
             title="Facebook"
           >
             <FacebookIcon className="w-6 h-6" />
@@ -209,7 +230,7 @@ END:VCARD`
             href={companyData.socials.x}
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 transition-colors"
+            className="text-[#37419A] hover:text-[#CF963F] transition-colors"
             title="X"
           >
             <XIcon className="w-5 h-5" />
@@ -218,7 +239,7 @@ END:VCARD`
             href={companyData.socials.instagram} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 transition-colors"
+            className="text-[#37419A] hover:text-[#CF963F] transition-colors"
             title="Instagram"
           >
             <InstagramIcon className="w-6 h-6" />
@@ -227,7 +248,7 @@ END:VCARD`
             href={companyData.socials.linkedin} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 transition-colors"
+            className="text-[#37419A] hover:text-[#CF963F] transition-colors"
             title="LinkedIn"
           >
             <LinkedinIcon className="w-6 h-6" />
@@ -236,7 +257,7 @@ END:VCARD`
             href={companyData.socials.youtube} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 transition-colors"
+            className="text-[#37419A] hover:text-[#CF963F] transition-colors"
             title="YouTube"
           >
             <YoutubeIcon className="w-6 h-6" />
@@ -245,7 +266,7 @@ END:VCARD`
 
         <button
           onClick={handleSaveContact}
-          className="w-full mt-8 bg-blue-600 text-white py-4 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors font-medium shadow-sm"
+          className="w-full mt-8 bg-[#37419A] text-white py-4 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-[#CF963F] transition-colors font-medium shadow-sm"
         >
           <SaveIcon className="w-5 h-5" />
           <span>Save Contact</span>
