@@ -132,13 +132,14 @@ END:VCARD`
           </div>
 
           {/* Company Logo */}
-          <div className="w-40">
+          <div className="w-40 flex justify-end">
             <Image 
               src="https://res.cloudinary.com/somani/image/upload/v1730981810/Somani%20Realtors%20Logo%20round.png"
               alt="Somani Realtors Logo"
               width={160}
               height={56}
               priority
+              unoptimized
               className="h-14 w-auto"
             />
           </div>
