@@ -118,28 +118,28 @@ END:VCARD`
       {/* Top Section with White Background */}
       <div className="bg-white pt-6 pb-20 px-6 relative">
         <div className="flex justify-between items-start mb-4">
-          {/* Company Logo */}
-          <div className="w-32">
-            <Image 
-              src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
-              alt="Somani Realtors Logo"
-              width={128}
-              height={32}
-              priority
-              className="h-8 w-auto"
-            />
-          </div>
-
           {/* 34 Years Logo */}
-          <div className="w-32">
+          <div className="w-40">
             <Image 
               src="https://res.cloudinary.com/somani/image/upload/v1735978151/PC_34yrs_b3hyde.png"
               alt="34 Years Logo"
-              width={128}
-              height={32}
+              width={160}
+              height={60}
               priority
               unoptimized
-              className="h-8 w-auto"
+              className="h-14 w-auto"
+            />
+          </div>
+
+          {/* Company Logo */}
+          <div className="w-40">
+            <Image 
+              src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
+              alt="Somani Realtors Logo"
+              width={160}
+              height={60}
+              priority
+              className="h-14 w-auto"
             />
           </div>
         </div>
