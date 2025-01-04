@@ -47,29 +47,6 @@ const companyData = {
   }
 }
 
-const LogoHeader = () => {
-  return (
-    <div className="absolute top-4 left-0 right-0 flex justify-between px-6">
-      <Image 
-        src="/24x7.png"
-        alt="24x7 Service"
-        width={60}
-        height={60}
-        className="object-contain"
-        priority
-      />
-      <Image 
-        src="/somani-logo.png"
-        alt="Somani Realtors"
-        width={60}
-        height={60}
-        className="object-contain"
-        priority
-      />
-    </div>
-  )
-}
-
 const DigitalCard = ({ employeeData }: DigitalCardProps) => {
   const getBase64Image = async (imageUrl: string): Promise<string> => {
     try {
@@ -139,17 +116,45 @@ END:VCARD`
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 h-32 flex items-center justify-center relative">
-        <LogoHeader />
-        <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white shadow-md transform translate-y-16">
-          <Image 
-            src={employeeData.imageUrl}
-            alt={`${employeeData.firstName} ${employeeData.lastName}`}
-            width={128}
-            height={128}
-            className="rounded-full object-cover"
-            priority
-          />
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 h-32 relative">
+        {/* Logo Container */}
+        <div className="absolute top-4 left-0 right-0 flex justify-between items-start px-4">
+          {/* 24 years logo - moved to left */}
+          <div className="w-16 h-16">
+            <Image 
+              src="/api/placeholder/64/64"
+              alt="24 Years Logo"
+              width={64}
+              height={64}
+              className="object-contain"
+              priority
+            />
+          </div>
+          {/* Company logo - moved to right */}
+          <div className="w-12 h-12">
+            <Image 
+              src="/api/placeholder/48/48"
+              alt="Somani Realtors Logo"
+              width={48}
+              height={48}
+              className="object-contain"
+              priority
+            />
+          </div>
+        </div>
+
+        {/* Profile Image */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-16">
+          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white shadow-md">
+            <Image 
+              src={employeeData.imageUrl}
+              alt={`${employeeData.firstName} ${employeeData.lastName}`}
+              width={128}
+              height={128}
+              className="rounded-full object-cover"
+              priority
+            />
+          </div>
         </div>
       </div>
 
