@@ -125,21 +125,8 @@ END:VCARD`;
       {/* Top Section with White Background */}
       <div className="bg-white pt-4 pb-16 px-6 relative">
         <div className="flex justify-between items-start mb-2">
-          {/* 34 Years Logo */}
-          <div className="w-48 mt-3">
-            <Image 
-              src="https://res.cloudinary.com/somani/image/upload/v1735978151/PC_34yrs_b3hyde.png"
-              alt="34 Years Logo"
-              width={200}
-              height={96}
-              priority
-              unoptimized
-              className="h-24 w-auto"
-            />
-          </div>
-
           {/* Company Logo */}
-          <div className="w-48 flex justify-end">
+          <div className="w-48">
             <Image 
               src="https://res.cloudinary.com/somani/image/upload/v1730981810/Somani%20Realtors%20Logo%20round.png"
               alt="Somani Realtors Logo"
@@ -148,6 +135,19 @@ END:VCARD`;
               priority
               unoptimized
               className="h-[120px] w-auto"
+            />
+          </div>
+
+          {/* 34 Years Logo */}
+          <div className="w-48 flex justify-end mt-3">
+            <Image 
+              src="https://res.cloudinary.com/somani/image/upload/v1735978151/PC_34yrs_b3hyde.png"
+              alt="34 Years Logo"
+              width={200}
+              height={96}
+              priority
+              unoptimized
+              className="h-20 w-auto"
             />
           </div>
         </div>
