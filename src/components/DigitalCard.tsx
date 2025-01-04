@@ -116,49 +116,42 @@ END:VCARD`
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
       {/* Top Section with White Background */}
-      <div className="bg-white pt-4 pb-16 px-6 relative">
-        <div className="flex justify-between items-start">
-          {/* Proudly Celebrating */}
-          <div className="text-[#37419A] font-medium text-sm">
-            <p>Proudly</p>
-            <p>Celebrating</p>
-          </div>
-
+      <div className="bg-white pt-6 pb-20 px-6 relative">
+        <div className="flex justify-between items-start mb-4">
           {/* Company Logo */}
-          <div className="w-24">
+          <div className="w-32">
             <Image 
               src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
               alt="Somani Realtors Logo"
-              width={96}
-              height={24}
+              width={128}
+              height={32}
               priority
-              className="mb-2"
+              className="h-8 w-auto"
             />
           </div>
-        </div>
-        
-        {/* Anniversary Logo */}
-        <div className="flex justify-center my-4">
-          <div className="w-16 h-16 relative">
+
+          {/* 34 Years Logo */}
+          <div className="w-32">
             <Image 
-              src="https://res.cloudinary.com/somani/image/upload/v1735973297/34_yrs_logo_t6fsjv.png"
+              src="https://res.cloudinary.com/somani/image/upload/v1735978151/PC_34yrs_b3hyde.png"
               alt="34 Years Logo"
-              width={64}
-              height={64}
+              width={128}
+              height={32}
               priority
-              unoptimized={true}
+              unoptimized
+              className="h-8 w-auto"
             />
           </div>
         </div>
 
         {/* Profile Image - Positioned to overlap sections */}
         <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2">
-          <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-[#37419A]">
+          <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#37419A]">
             <Image 
               src={employeeData.imageUrl}
               alt={`${employeeData.firstName} ${employeeData.lastName}`}
-              width={96}
-              height={96}
+              width={128}
+              height={128}
               className="rounded-full object-cover"
               priority
             />
@@ -167,7 +160,7 @@ END:VCARD`
       </div>
 
       {/* Bottom Section with Blue Background */}
-      <div className="bg-[#37419A] pt-16 pb-6 px-6">
+      <div className="bg-[#37419A] pt-20 pb-6 px-6">
         <h1 className="text-xl font-bold text-center text-white">
           {employeeData.firstName} {employeeData.lastName}
         </h1>
