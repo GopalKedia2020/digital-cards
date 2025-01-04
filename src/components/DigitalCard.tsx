@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
-import { 
-  PhoneIcon, 
-  MailIcon, 
-  SaveIcon, 
-  MapPinIcon, 
+import {
+  PhoneIcon,
+  MailIcon,
+  SaveIcon,
+  MapPinIcon,
   GlobeIcon,
   FacebookIcon,
   InstagramIcon,
@@ -13,12 +13,7 @@ import {
 } from 'lucide-react'
 
 const XIcon = ({ className }: { className?: string }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    className={className} 
-    fill="currentColor"
-    aria-hidden="true"
-  >
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 )
@@ -74,7 +69,7 @@ const DigitalCard = ({ employeeData }: DigitalCardProps) => {
   const handleSaveContact = async () => {
     try {
       const photoData = employeeData.imageUrl ? await getBase64Image(employeeData.imageUrl) : ''
-      
+
       const vCard = `BEGIN:VCARD
 VERSION:3.0
 N:${employeeData.lastName};${employeeData.firstName};;;
@@ -116,136 +111,73 @@ END:VCARD`
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 h-32 flex items-center justify-center">
-        <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white shadow-md transform translate-y-16">
-          <Image 
-            src={employeeData.imageUrl}
-            alt={`${employeeData.firstName} ${employeeData.lastName}`}
-            width={128}
-            height={128}
-            className="rounded-full object-cover"
+      {/* Header Section */}
+      <div className="bg-gradient-to-r from-[#37419A] to-[#CF963F] p-6 flex flex-col items-center">
+        <Image
+          src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
+          alt="Somani Realtors Logo"
+          width={150}
+          height={50}
+          className="mb-4"
+          priority
+        />
+        <div className="flex items-center">
+          <Image
+            src="https://res.cloudinary.com/somani/image/upload/v1735973297/34_yrs_logo_t6fsjv.png"
+            alt="34 Years Logo"
+            width={50}
+            height={50}
+            className="mr-2"
             priority
           />
+          <span className="text-white text-lg font-medium">Celebrating</span>
         </div>
       </div>
 
-      <div className="px-6 pt-20 pb-8">
+      {/* Employee Details */}
+      <div className="px-6 pt-6 pb-8">
         <h1 className="text-2xl font-bold text-center text-gray-900">
           {employeeData.firstName} {employeeData.lastName}
         </h1>
-        <p className="text-center text-gray-600 mt-2">
-          {employeeData.designation}
-        </p>
-        <p className="text-center text-blue-600 font-medium mt-1">
-          {companyData.name}
-        </p>
-        
-        <div className="mt-8 space-y-3">
-          <a 
-            href={`tel:${employeeData.mobile}`} 
-            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
-          >
+        <p className="text-center text-gray-600 mt-2">{employeeData.designation}</p>
+        <p className="text-center text-[#37419A] font-medium mt-1">{companyData.name}</p>
+
+        {/* Contact Links */}
+        <div className="mt-6 space-y-3">
+          <a href={`tel:${employeeData.mobile}`} className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
             <PhoneIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
             <div>
               <span className="text-gray-700">{employeeData.mobile}</span>
               <span className="text-sm text-gray-500 block">Mobile</span>
             </div>
           </a>
-
-          <a 
-            href={`tel:${companyData.workPhone}`} 
-            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
-          >
-            <PhoneIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
-            <div>
-              <span className="text-gray-700">{companyData.workPhone}</span>
-              <span className="text-sm text-gray-500 block">Office</span>
-            </div>
-          </a>
-
-          <a 
-            href={`mailto:${employeeData.email}`} 
-            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
-          >
+          <a href={`mailto:${employeeData.email}`} className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
             <MailIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
             <span className="text-gray-700 break-all">{employeeData.email}</span>
           </a>
-
-          <a 
-            href={`https://${companyData.website}`}
-            target="_blank"
-            rel="noopener noreferrer" 
-            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
-          >
+          <a href={`https://${companyData.website}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
             <GlobeIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
             <span className="text-gray-700">{companyData.website}</span>
           </a>
-
-          <a 
-            href={getMapsUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group"
-          >
-            <MapPinIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
-            <div>
-              <span className="text-gray-700 text-sm">{companyData.address}</span>
-              <span className="text-sm text-blue-600 block group-hover:underline">Open in Google Maps</span>
-            </div>
-          </a>
         </div>
 
+        {/* Social Media */}
         <div className="mt-8 flex justify-center gap-4">
-          <a 
-            href={companyData.socials.facebook} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="text-blue-600 hover:text-blue-700 transition-colors"
-            title="Facebook"
-          >
+          <a href={companyData.socials.facebook} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 transition-colors">
             <FacebookIcon className="w-6 h-6" />
           </a>
-          <a 
-            href={companyData.socials.x}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 transition-colors"
-            title="X"
-          >
+          <a href={companyData.socials.x} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 transition-colors">
             <XIcon className="w-5 h-5" />
           </a>
-          <a 
-            href={companyData.socials.instagram} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 transition-colors"
-            title="Instagram"
-          >
+          <a href={companyData.socials.instagram} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 transition-colors">
             <InstagramIcon className="w-6 h-6" />
-          </a>
-          <a 
-            href={companyData.socials.linkedin} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 transition-colors"
-            title="LinkedIn"
-          >
-            <LinkedinIcon className="w-6 h-6" />
-          </a>
-          <a 
-            href={companyData.socials.youtube} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 transition-colors"
-            title="YouTube"
-          >
-            <YoutubeIcon className="w-6 h-6" />
           </a>
         </div>
 
+        {/* Save Contact */}
         <button
           onClick={handleSaveContact}
-          className="w-full mt-8 bg-blue-600 text-white py-4 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors font-medium shadow-sm"
+          className="w-full mt-8 bg-[#37419A] text-white py-4 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-[#CF963F] transition-colors font-medium shadow-sm"
         >
           <SaveIcon className="w-5 h-5" />
           <span>Save Contact</span>
