@@ -124,10 +124,10 @@ END:VCARD`
               src="https://res.cloudinary.com/somani/image/upload/v1735978151/PC_34yrs_b3hyde.png"
               alt="34 Years Logo"
               width={160}
-              height={60}
+              height={64}
               priority
               unoptimized
-              className="h-14 w-auto"
+              className="h-16 w-auto"
             />
           </div>
 
@@ -137,7 +137,7 @@ END:VCARD`
               src="https://res.cloudinary.com/somani/image/upload/v1730981810/Somani%20Realtors%20Logo%20round.png"
               alt="Somani Realtors Logo"
               width={160}
-              height={60}
+              height={56}
               priority
               className="h-14 w-auto"
             />
