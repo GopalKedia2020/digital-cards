@@ -121,17 +121,6 @@ END:VCARD`
           className="mb-4"
           priority
         />
-        <div className="flex items-center">
-          <Image
-            src="https://res.cloudinary.com/somani/image/upload/v1735973297/34_yrs_logo_t6fsjv.png"
-            alt="34 Years Logo"
-            width={50}
-            height={50}
-            className="mr-2"
-            priority
-          />
-          <span className="text-white text-lg font-medium">Celebrating</span>
-        </div>
       </div>
 
       {/* Employee Details */}
@@ -155,9 +144,9 @@ END:VCARD`
             <MailIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
             <span className="text-gray-700 break-all">{employeeData.email}</span>
           </a>
-          <a href={`https://${companyData.website}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
-            <GlobeIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
-            <span className="text-gray-700">{companyData.website}</span>
+          <a href={getMapsUrl()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
+            <MapPinIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <span className="text-gray-700">{companyData.address}</span>
           </a>
         </div>
 
@@ -171,6 +160,12 @@ END:VCARD`
           </a>
           <a href={companyData.socials.instagram} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 transition-colors">
             <InstagramIcon className="w-6 h-6" />
+          </a>
+          <a href={companyData.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 transition-colors">
+            <LinkedinIcon className="w-6 h-6" />
+          </a>
+          <a href={companyData.socials.youtube} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 transition-colors">
+            <YoutubeIcon className="w-6 h-6" />
           </a>
         </div>
 
