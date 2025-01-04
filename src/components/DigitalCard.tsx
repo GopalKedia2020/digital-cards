@@ -134,7 +134,7 @@ END:VCARD`
           {/* Company Logo */}
           <div className="w-40">
             <Image 
-              src="https://res.cloudinary.com/somani/image/upload/v1730982022/Somani%20Realtors%20Logo%20Svg%20File.svg"
+              src="https://res.cloudinary.com/somani/image/upload/v1730981810/Somani%20Realtors%20Logo%20round.png"
               alt="Somani Realtors Logo"
               width={160}
               height={60}
