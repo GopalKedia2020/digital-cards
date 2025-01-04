@@ -44,10 +44,11 @@ const companyData = {
   name: "Somani Realtors",
   workPhone: "033 40274027",
   website: "www.somanirealtors.com",
-  address: "40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020",
+  fullAddress: "Somani Realtors Pvt Ltd, 40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020",
+  displayAddress: "40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020",
   coordinates: {
-    lat: "22.5257",
-    lng: "88.3451"
+    lat: "22.5342279",
+    lng: "88.3458677"
   },
   socials: {
     facebook: "https://facebook.com/somanirealtors",
@@ -95,7 +96,7 @@ TITLE:${employeeData.designation}
 TEL;TYPE=CELL:${employeeData.mobile}
 TEL;TYPE=WORK:${companyData.workPhone}
 EMAIL:${employeeData.email}
-ADR:;;${companyData.address}
+ADR:;;${companyData.fullAddress}
 URL:https://${companyData.website}
 URL;type=Facebook:${companyData.socials.facebook}
 URL;type=x.com:${companyData.socials.x}
@@ -121,7 +122,7 @@ END:VCARD`;
   };
 
   const getMapsUrl = () => {
-    const query = encodeURIComponent(companyData.address);
+    const query = encodeURIComponent(companyData.fullAddress);
     return `https://www.google.com/maps/search/?api=1&query=${query}`;
   };
 
@@ -227,7 +228,7 @@ END:VCARD`;
           {getContactButton(
             getMapsUrl(),
             React.createElement(MapPinIcon),
-            companyData.address,
+            companyData.displayAddress,
             'Open in Google Maps'
           )}
         </div>
