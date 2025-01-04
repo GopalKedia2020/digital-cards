@@ -141,11 +141,12 @@ END:VCARD`
         <div className="flex justify-center my-4">
           <div className="w-16 h-16 relative">
             <Image 
-              src="/api/placeholder/64/64"
+              src="https://res.cloudinary.com/somani/image/upload/v1735973297/34_yrs_logo_t6fsjv.png"
               alt="34 Years Logo"
               width={64}
               height={64}
               priority
+              unoptimized={true}
             />
           </div>
         </div>
