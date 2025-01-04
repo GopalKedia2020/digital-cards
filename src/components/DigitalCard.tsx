@@ -11,15 +11,18 @@ import {
   YoutubeIcon
 } from 'lucide-react';
 
-const XIcon = ({ className }: { className?: string }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    className={className} 
-    fill="currentColor"
-    aria-hidden="true"
-  >
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
+const XIcon = React.forwardRef<SVGSVGElement, { className?: string }>(
+  ({ className }, ref) => (
+    <svg 
+      viewBox="0 0 24 24" 
+      className={className} 
+      fill="currentColor"
+      aria-hidden="true"
+      ref={ref}
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )
 );
 
 interface EmployeeData {
@@ -91,7 +94,7 @@ TEL;TYPE=CELL:${employeeData.mobile}
 TEL;TYPE=WORK:${companyData.workPhone}
 EMAIL:${employeeData.email}
 ADR:;;${companyData.address}
-URL:${companyData.website}
+URL:https://${companyData.website}
 URL;type=Facebook:${companyData.socials.facebook}
 URL;type=x.com:${companyData.socials.x}
 URL;type=LinkedIn:${companyData.socials.linkedin}
@@ -119,6 +122,28 @@ END:VCARD`;
     const query = encodeURIComponent(companyData.address);
     return `https://www.google.com/maps/search/?api=1&query=${query}`;
   };
+
+  const getContactButton = (
+    href: string,
+    icon: React.ReactElement<any>,
+    primary: string,
+    secondary?: string
+  ) => (
+    <a 
+      href={href}
+      target={href.startsWith('tel:') || href.startsWith('mailto:') ? undefined : '_blank'}
+      rel={href.startsWith('tel:') || href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+      className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+    >
+      {React.cloneElement(icon, {
+        className: "w-5 h-5 text-white flex-shrink-0"
+      })}
+      <div>
+        <span className="text-white text-sm break-all">{primary}</span>
+        {secondary && <span className="text-xs text-gray-200 block">{secondary}</span>}
+      </div>
+    </a>
+  );
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
@@ -177,97 +202,68 @@ END:VCARD`;
         </p>
         
         <div className="space-y-3">
-          <a 
-            href={`tel:${employeeData.mobile}`} 
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
-          >
-            <PhoneIcon className="w-5 h-5 text-white flex-shrink-0" />
-            <div>
-              <span className="text-white text-sm">{employeeData.mobile}</span>
-              <span className="text-xs text-gray-200 block">Mobile</span>
-            </div>
-          </a>
+          {getContactButton(
+            `tel:${employeeData.mobile}`,
+            React.createElement(PhoneIcon),
+            employeeData.mobile,
+            'Mobile'
+          )}
 
-          <a 
-            href={`tel:${companyData.workPhone}`} 
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
-          >
-            <PhoneIcon className="w-5 h-5 text-white flex-shrink-0" />
-            <div>
-              <span className="text-white text-sm">{companyData.workPhone}</span>
-              <span className="text-xs text-gray-200 block">Office</span>
-            </div>
-          </a>
+          {getContactButton(
+            `tel:${companyData.workPhone}`,
+            React.createElement(PhoneIcon),
+            companyData.workPhone,
+            'Office'
+          )}
 
-          <a 
-            href={`mailto:${employeeData.email}`} 
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
-          >
-            <MailIcon className="w-5 h-5 text-white flex-shrink-0" />
-            <span className="text-white text-sm break-all">{employeeData.email}</span>
-          </a>
+          {getContactButton(
+            `mailto:${employeeData.email}`,
+            React.createElement(MailIcon),
+            employeeData.email
+          )}
 
+          {getContactButton(
+            getMapsUrl(),
+            React.createElement(MapPinIcon),
+            companyData.address,
+            'Open in Google Maps'
+          )}
+        </div>
+
+        {/* Social Media Links */}
+        <div className="mt-6 flex justify-center gap-6">
+          {[
+            { href: companyData.socials.facebook, Icon: FacebookIcon },
+            { href: companyData.socials.x, Icon: XIcon },
+            { href: companyData.socials.instagram, Icon: InstagramIcon },
+            { href: companyData.socials.linkedin, Icon: LinkedinIcon },
+            { href: companyData.socials.youtube, Icon: YoutubeIcon }
+          ].map(({ href, Icon }) => (
+            <a 
+              key={href}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-[#CF963F] transition-colors"
+            >
+              <Icon className="w-5 h-5" />
+            </a>
+          ))}
+        </div>
+
+        {/* Website Link */}
+        <div className="mt-4 text-center">
           <a 
-            href={getMapsUrl()}
+            href={`https://${companyData.website}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+            className="text-sm text-white hover:text-[#CF963F] transition-colors"
           >
-            <MapPinIcon className="w-5 h-5 text-white flex-shrink-0" />
-            <div>
-              <span className="text-sm text-white">{companyData.address}</span>
-              <span className="text-xs text-[#CF963F] block hover:underline">Open in Google Maps</span>
-            </div>
+            {companyData.website}
           </a>
         </div>
 
-        <div className="mt-6 flex justify-center gap-6">
-          <a 
-            href={companyData.socials.facebook} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="text-white hover:text-[#CF963F] transition-colors"
-          >
-            <FacebookIcon className="w-5 h-5" />
-          </a>
-          <a 
-            href={companyData.socials.x}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-white hover:text-[#CF963F] transition-colors flex items-center"
-          >
-            <XIcon className="w-5 h-5" />
-          </a>
-          <a 
-            href={companyData.socials.instagram} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-white hover:text-[#CF963F] transition-colors"
-          >
-            <InstagramIcon className="w-5 h-5" />
-          </a>
-          <a 
-            href={companyData.socials.linkedin} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-white hover:text-[#CF963F] transition-colors"
-          >
-            <LinkedinIcon className="w-5 h-5" />
-          </a>
-          <a 
-            href={companyData.socials.youtube} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-white hover:text-[#CF963F] transition-colors"
-          >
-            <YoutubeIcon className="w-5 h-5" />
-          </a>
-        </div>
-
-        <div className="mt-4 text-center">
-          <p className="text-sm text-white">{companyData.website}</p>
-        </div>
-
+        {/* Save Contact Button */}
         <button
           onClick={handleSaveContact}
           className="w-full mt-4 bg-[#CF963F] text-white py-3 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-[#b17d2f] transition-colors"
