@@ -126,7 +126,7 @@ END:VCARD`;
       <div className="bg-white pt-4 pb-16 px-6 relative">
         <div className="flex justify-between items-start mb-2">
           {/* Company Logo */}
-          <div className="w-48">
+          <div className="w-48 mt-3">
             <Image 
               src="https://res.cloudinary.com/somani/image/upload/v1730981810/Somani%20Realtors%20Logo%20round.png"
               alt="Somani Realtors Logo"
@@ -139,7 +139,7 @@ END:VCARD`;
           </div>
 
           {/* 34 Years Logo */}
-          <div className="w-48 flex justify-end mt-3">
+          <div className="w-48 flex justify-end">
             <Image 
               src="https://res.cloudinary.com/somani/image/upload/v1735978151/PC_34yrs_b3hyde.png"
               alt="34 Years Logo"
