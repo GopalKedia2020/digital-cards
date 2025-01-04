@@ -1,151 +1,258 @@
-import React from "react";
+import React from 'react'
+import Image from 'next/image'
+import { 
+  PhoneIcon, 
+  MailIcon, 
+  SaveIcon, 
+  MapPinIcon, 
+  GlobeIcon,
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  YoutubeIcon
+} from 'lucide-react'
 
-const BusinessCard: React.FC = () => {
+const XIcon = ({ className }: { className?: string }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    className={className} 
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+)
+
+import type { EmployeeData } from '@/data/employees'
+
+interface DigitalCardProps {
+  employeeData: EmployeeData
+}
+
+const companyData = {
+  name: "Somani Realtors",
+  workPhone: "033 40274027",
+  website: "www.somanirealtors.com",
+  address: "Somani Realtors Pvt Ltd, 40, Ashutosh Mukherjee Road, 2nd Floor, Bhowanipore, Kolkata, West Bengal 700020",
+  coordinates: {
+    lat: "22.5257",
+    lng: "88.3451"
+  },
+  socials: {
+    facebook: "https://facebook.com/somanirealtors",
+    x: "https://x.com/somani_realtors",
+    instagram: "https://www.instagram.com/somanirealtors/",
+    linkedin: "https://in.linkedin.com/company/somanirealtors",
+    youtube: "https://www.youtube.com/c/SomaniRealtorsPvtLtd"
+  }
+}
+
+const DigitalCard = ({ employeeData }: DigitalCardProps) => {
+  const getBase64Image = async (imageUrl: string): Promise<string> => {
+    try {
+      const response = await fetch(imageUrl)
+      const blob = await response.blob()
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          if (typeof reader.result === 'string') {
+            const base64String = reader.result.split(',')[1]
+            resolve(base64String)
+          } else {
+            reject(new Error('Failed to convert image to base64'))
+          }
+        }
+        reader.onerror = reject
+        reader.readAsDataURL(blob)
+      })
+    } catch (error) {
+      console.error('Error converting image to base64:', error)
+      return ''
+    }
+  }
+
+  const handleSaveContact = async () => {
+    try {
+      const photoData = employeeData.imageUrl ? await getBase64Image(employeeData.imageUrl) : ''
+      
+      const vCard = `BEGIN:VCARD
+VERSION:3.0
+N:${employeeData.lastName};${employeeData.firstName};;;
+FN:${employeeData.firstName} ${employeeData.lastName}
+ORG:${companyData.name}
+TITLE:${employeeData.designation}
+TEL;TYPE=CELL:${employeeData.mobile}
+TEL;TYPE=WORK:${companyData.workPhone}
+EMAIL:${employeeData.email}
+ADR:;;${companyData.address}
+URL:${companyData.website}
+URL;type=Facebook:${companyData.socials.facebook}
+URL;type=x.com:${companyData.socials.x}
+URL;type=LinkedIn:${companyData.socials.linkedin}
+URL;type=Instagram:${companyData.socials.instagram}
+URL;type=YouTube:${companyData.socials.youtube}
+GEO:${companyData.coordinates.lat},${companyData.coordinates.lng}${photoData ? `
+PHOTO;ENCODING=b;TYPE=JPEG:${photoData}` : ''}
+END:VCARD`
+
+      const blob = new Blob([vCard], { type: 'text/vcard' })
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `${employeeData.firstName}_${employeeData.lastName}_Somani.vcf`)
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.URL.revokeObjectURL(url)
+    } catch (error) {
+      console.error('Error creating vCard:', error)
+    }
+  }
+
+  const getMapsUrl = () => {
+    const query = encodeURIComponent(companyData.address)
+    return `https://www.google.com/maps/search/?api=1&query=${query}`
+  }
+
   return (
-    <div
-      style={{
-        maxWidth: "400px",
-        margin: "auto",
-        border: "1px solid #ddd",
-        borderRadius: "10px",
-        overflow: "hidden",
-        boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-        fontFamily: "'Arial', sans-serif",
-      }}
-    >
-      {/* Header with Logos */}
-      <div
-        style={{
-          background: "#fff",
-          padding: "15px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <img
-          src="/logo.png" // Replace with your actual logo path
-          alt="Somani Realtors"
-          style={{ height: "40px" }}
-        />
-        <img
-          src="/34-year-logo.png" // Replace with your 34-year celebration logo path
-          alt="34 Years Logo"
-          style={{ height: "40px" }}
-        />
-      </div>
-
-      {/* Profile Photo */}
-      <div
-        style={{
-          position: "relative",
-          textAlign: "center",
-          background: "#0056B3", // Blue background
-          color: "#fff",
-          padding: "50px 20px 20px",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: "-50px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "100px",
-            height: "100px",
-            borderRadius: "50%",
-            border: "5px solid #fff",
-            overflow: "hidden",
-          }}
-        >
-          <img
-            src="/profile.jpg" // Replace with your actual profile photo path
-            alt="Profile"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+    <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 h-32 flex items-center justify-center">
+        <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white bg-white shadow-md transform translate-y-16">
+          <Image 
+            src={employeeData.imageUrl}
+            alt={`${employeeData.firstName} ${employeeData.lastName}`}
+            width={128}
+            height={128}
+            className="rounded-full object-cover"
+            priority
           />
         </div>
       </div>
 
-      {/* Contact Details */}
-      <div style={{ background: "#0056B3", color: "#fff", padding: "10px 20px" }}>
-        <h3 style={{ margin: "60px 0 5px", fontSize: "1.2em" }}>Sumeet Roy</h3>
-        <p style={{ margin: "0", fontSize: "0.9em" }}>Assistant General Manager - Operations</p>
-        <p style={{ margin: "0", fontSize: "0.9em" }}>Somani Realtors</p>
-      </div>
-
-      {/* Info Section */}
-      <div style={{ padding: "15px 20px", background: "#f9f9f9", color: "#333" }}>
-        <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-          <span style={{ marginRight: "10px" }}>📞</span>
-          <a href="tel:+919830015606" style={{ color: "#0056B3", textDecoration: "none" }}>
-            +91 98300 15606
-          </a>
-        </div>
-        <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-          <span style={{ marginRight: "10px" }}>📧</span>
-          <a
-            href="mailto:sumeetroy@somanirealtors.com"
-            style={{ color: "#0056B3", textDecoration: "none" }}
+      <div className="px-6 pt-20 pb-8">
+        <h1 className="text-2xl font-bold text-center text-gray-900">
+          {employeeData.firstName} {employeeData.lastName}
+        </h1>
+        <p className="text-center text-gray-600 mt-2">
+          {employeeData.designation}
+        </p>
+        <p className="text-center text-blue-600 font-medium mt-1">
+          {companyData.name}
+        </p>
+        
+        <div className="mt-8 space-y-3">
+          <a 
+            href={`tel:${employeeData.mobile}`} 
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
           >
-            sumeetroy@somanirealtors.com
+            <PhoneIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <div>
+              <span className="text-gray-700">{employeeData.mobile}</span>
+              <span className="text-sm text-gray-500 block">Mobile</span>
+            </div>
+          </a>
+
+          <a 
+            href={`tel:${companyData.workPhone}`} 
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+          >
+            <PhoneIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <div>
+              <span className="text-gray-700">{companyData.workPhone}</span>
+              <span className="text-sm text-gray-500 block">Office</span>
+            </div>
+          </a>
+
+          <a 
+            href={`mailto:${employeeData.email}`} 
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+          >
+            <MailIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <span className="text-gray-700 break-all">{employeeData.email}</span>
+          </a>
+
+          <a 
+            href={`https://${companyData.website}`}
+            target="_blank"
+            rel="noopener noreferrer" 
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+          >
+            <GlobeIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <span className="text-gray-700">{companyData.website}</span>
+          </a>
+
+          <a 
+            href={getMapsUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group"
+          >
+            <MapPinIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <div>
+              <span className="text-gray-700 text-sm">{companyData.address}</span>
+              <span className="text-sm text-blue-600 block group-hover:underline">Open in Google Maps</span>
+            </div>
           </a>
         </div>
-        <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-          <span style={{ marginRight: "10px" }}>📍</span>
-          <p style={{ margin: 0 }}>40, Ashutosh Mukherjee Road, 2nd Floor, Kolkata</p>
+
+        <div className="mt-8 flex justify-center gap-4">
+          <a 
+            href={companyData.socials.facebook} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="Facebook"
+          >
+            <FacebookIcon className="w-6 h-6" />
+          </a>
+          <a 
+            href={companyData.socials.x}
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="X"
+          >
+            <XIcon className="w-5 h-5" />
+          </a>
+          <a 
+            href={companyData.socials.instagram} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="Instagram"
+          >
+            <InstagramIcon className="w-6 h-6" />
+          </a>
+          <a 
+            href={companyData.socials.linkedin} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="LinkedIn"
+          >
+            <LinkedinIcon className="w-6 h-6" />
+          </a>
+          <a 
+            href={companyData.socials.youtube} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-700 transition-colors"
+            title="YouTube"
+          >
+            <YoutubeIcon className="w-6 h-6" />
+          </a>
         </div>
-      </div>
 
-      {/* Social Icons */}
-      <div
-        style={{
-          padding: "15px",
-          background: "#0056B3",
-          color: "#fff",
-          display: "flex",
-          justifyContent: "center",
-          gap: "15px",
-        }}
-      >
-        <a href="#" style={{ color: "#fff", textDecoration: "none", fontSize: "1.5em" }}>
-          🌐
-        </a>
-        <a href="#" style={{ color: "#fff", textDecoration: "none", fontSize: "1.5em" }}>
-          🔗
-        </a>
-        <a href="#" style={{ color: "#fff", textDecoration: "none", fontSize: "1.5em" }}>
-          📘
-        </a>
-      </div>
-
-      {/* Save Contact Button */}
-      <div
-        style={{
-          textAlign: "center",
-          background: "#0056B3",
-          padding: "15px",
-          color: "#fff",
-          cursor: "pointer",
-        }}
-      >
-        <a
-          href="#"
-          style={{
-            display: "block",
-            background: "#003D82",
-            padding: "10px 20px",
-            borderRadius: "5px",
-            textDecoration: "none",
-            color: "#fff",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = "#0069D9")}
-          onMouseLeave={(e) => (e.currentTarget.style.background = "#003D82")}
+        <button
+          onClick={handleSaveContact}
+          className="w-full mt-8 bg-blue-600 text-white py-4 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors font-medium shadow-sm"
         >
-          Save Contact
-        </a>
+          <SaveIcon className="w-5 h-5" />
+          <span>Save Contact</span>
+        </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BusinessCard;
+export default DigitalCard
