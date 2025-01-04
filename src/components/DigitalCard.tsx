@@ -182,7 +182,7 @@ END:VCARD`
           >
             <PhoneIcon className="w-5 h-5 text-white flex-shrink-0" />
             <div>
-              <span className="text-white text-sm">+{employeeData.mobile}</span>
+              <span className="text-white text-sm">{employeeData.mobile}</span>
               <span className="text-xs text-gray-200 block">Mobile</span>
             </div>
           </a>
