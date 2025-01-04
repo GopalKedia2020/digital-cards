@@ -116,18 +116,18 @@ END:VCARD`
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
       {/* Top Section with White Background */}
-      <div className="bg-white pt-6 pb-20 px-6 relative">
-        <div className="flex justify-between items-start mb-4">
+      <div className="bg-white pt-4 pb-16 px-6 relative">
+        <div className="flex justify-between items-start mb-2">
           {/* 34 Years Logo */}
           <div className="w-48">
             <Image 
               src="https://res.cloudinary.com/somani/image/upload/v1735978151/PC_34yrs_b3hyde.png"
               alt="34 Years Logo"
               width={200}
-              height={100}
+              height={96}
               priority
               unoptimized
-              className="h-24 w-auto" // ~100px
+              className="h-24 w-auto"
             />
           </div>
 
@@ -140,7 +140,7 @@ END:VCARD`
               height={120}
               priority
               unoptimized
-              className="h-28 w-auto" // ~120px
+              className="h-[120px] w-auto"
             />
           </div>
         </div>
@@ -161,15 +161,15 @@ END:VCARD`
       </div>
 
       {/* Bottom Section with Blue Background */}
-      <div className="bg-[#37419A] pt-20 pb-6 px-6">
+      <div className="bg-[#37419A] pt-16 pb-4 px-6">
         <h1 className="text-xl font-bold text-center text-white">
           {employeeData.firstName} {employeeData.lastName}
         </h1>
-        <p className="text-center mt-1 text-sm text-gray-200">
+        <p className="text-center mt-1 mb-4 text-sm text-gray-200">
           {employeeData.designation}
         </p>
         
-        <div className="mt-6 space-y-3">
+        <div className="mt-4 space-y-2">
           <a 
             href={`tel:${employeeData.mobile}`} 
             className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
@@ -214,7 +214,7 @@ END:VCARD`
           </a>
         </div>
 
-        <div className="mt-6 flex justify-center gap-6">
+        <div className="mt-4 flex justify-center gap-6">
           <a 
             href={companyData.socials.facebook} 
             target="_blank" 
@@ -257,13 +257,13 @@ END:VCARD`
           </a>
         </div>
 
-        <div className="mt-4 text-center">
+        <div className="mt-3 text-center">
           <p className="text-sm text-white">{companyData.website}</p>
         </div>
 
         <button
           onClick={handleSaveContact}
-          className="w-full mt-4 bg-[#CF963F] text-white py-3 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-[#b17d2f] transition-colors"
+          className="w-full mt-3 bg-[#CF963F] text-white py-3 px-6 rounded-lg flex items-center justify-center gap-2 hover:bg-[#b17d2f] transition-colors"
         >
           <SaveIcon className="w-5 h-5" />
           <span>Save Contact</span>
