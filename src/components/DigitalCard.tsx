@@ -126,60 +126,27 @@ END:VCARD`;
     return `https://www.google.com/maps/search/?api=1&query=${query}`;
   };
 
-  const handleEmailClick = (email: string) => {
-    // Try to open default mail client first
-    window.location.href = `mailto:${email}`;
-
-    // After a small delay, check if the mail client was opened
-    // If not, open Gmail compose in browser
-    setTimeout(() => {
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
-      window.open(gmailUrl, '_blank');
-    }, 300);
-  };
-
   const getContactButton = (
     href: string,
     icon: React.ReactElement<{ className?: string }>,
     primary: string,
     secondary?: string
-  ) => {
-    // Special handling for email
-    if (href.startsWith('mailto:')) {
-      return (
-        <button
-          onClick={() => handleEmailClick(primary)}
-          className="w-full flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
-        >
-          {React.cloneElement(icon, {
-            className: "w-5 h-5 text-white flex-shrink-0"
-          })}
-          <div>
-            <span className="text-white text-sm break-all">{primary}</span>
-            {secondary && <span className="text-xs text-gray-200 block">{secondary}</span>}
-          </div>
-        </button>
-      );
-    }
-
-    // Default handling for other types
-    return (
-      <a 
-        href={href}
-        target={href.startsWith('tel:') ? undefined : '_blank'}
-        rel={href.startsWith('tel:') ? undefined : 'noopener noreferrer'}
-        className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
-      >
-        {React.cloneElement(icon, {
-          className: "w-5 h-5 text-white flex-shrink-0"
-        })}
-        <div>
-          <span className="text-white text-sm break-all">{primary}</span>
-          {secondary && <span className="text-xs text-gray-200 block">{secondary}</span>}
-        </div>
-      </a>
-    );
-  };
+  ) => (
+    <a 
+      href={href}
+      target={href.startsWith('tel:') || href.startsWith('mailto:') ? undefined : '_blank'}
+      rel={href.startsWith('tel:') || href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+      className="flex items-center gap-3 p-3 rounded-lg bg-[#4351B0] hover:bg-[#4957BD] transition-colors"
+    >
+      {React.cloneElement(icon, {
+        className: "w-5 h-5 text-white flex-shrink-0"
+      })}
+      <div>
+        <span className="text-white text-sm break-all">{primary}</span>
+        {secondary && <span className="text-xs text-gray-200 block">{secondary}</span>}
+      </div>
+    </a>
+  );
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
