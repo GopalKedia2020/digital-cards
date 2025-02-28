@@ -140,8 +140,9 @@ yarn start
 
 ## 🔒 Security & Privacy Considerations
 
+- Private GitHub repository to protect employee contact information
 - Employee IDs are randomly generated and not sequential
-- Public information is limited to professional details only
+- Employee data file (employees.ts) excluded from Git via .gitignore
 - No sensitive personal data is exposed through the cards
 
 ### Search Engine Privacy
