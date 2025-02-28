@@ -12,6 +12,19 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: '/:id((?!$).*)',  // Match any path except the root
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow'
+          },
+        ],
+      },
+    ]
+  },
   webpack: (config) => {
     config.resolve = {
       ...config.resolve,
