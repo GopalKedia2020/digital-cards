@@ -138,11 +138,26 @@ yarn start
 3. They can save contact details to their phone with a single click
 4. Direct call, email, and map location access is available
 
-## 🔒 Security Notes
+## 🔒 Security & Privacy Considerations
 
 - Employee IDs are randomly generated and not sequential
 - Public information is limited to professional details only
 - No sensitive personal data is exposed through the cards
+
+### Search Engine Privacy
+
+The application implements several measures to prevent search engines from indexing individual employee cards:
+
+1. **Robots.txt Configuration**: A robots.txt file in the public directory instructs search engines to only index the homepage and static assets.
+
+2. **Meta Tags**: Each employee page includes meta tags that explicitly instruct search engines not to index or follow links on those pages:
+   ```html
+   <meta name="robots" content="noindex, nofollow">
+   ```
+
+3. **HTTP Headers**: The Next.js configuration adds HTTP headers with the X-Robots-Tag to further reinforce the non-indexing directive.
+
+These privacy measures help ensure that employee cards are only accessible to people who have been specifically given the links, and not discoverable through search engines.
 
 ## 📄 License
 
