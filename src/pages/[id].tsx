@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import DigitalCard from '../components/DigitalCard';
 import { employees } from '../data/employees';
 
@@ -16,7 +17,15 @@ const EmployeeCardPage = () => {
     return <div>Employee not found</div>;
   }
 
-  return <DigitalCard employeeData={employeeData} />;
+  return (
+    <>
+      <Head>
+        <title>{`${employeeData.firstName} ${employeeData.lastName} | Somani Realtors`}</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
+      <DigitalCard employeeData={employeeData} />
+    </>
+  );
 };
 
 export default EmployeeCardPage;
